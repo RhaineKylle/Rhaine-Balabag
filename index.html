@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="The digital portfolio of Rhaine Kylle Balabag, IT student and aspiring web developer in Baguio City, Philippines.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Rhaine Kylle Balabag — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="portfolio-shell">
+    <header class="site-header">
+      <button class="brand" type="button" data-view="home" aria-label="Rhaine — go to Home">
+        <span class="brand-symbol" aria-hidden="true"><span>R</span><span>B</span></span>
+        <span class="brand-word">RHAINE<span class="brand-period">.</span></span>
+      </button>
+
+      <nav class="primary-nav" aria-label="Main navigation">
+        <button class="nav-button is-active" type="button" data-view="home" aria-current="page">Home</button>
+        <button class="nav-button" type="button" data-view="about">About Me</button>
+        <button class="nav-button" type="button" data-view="skills">Skills</button>
+        <button class="nav-button" type="button" data-view="projects">Projects</button>
+        <button class="nav-button" type="button" data-view="education">Education</button>
+        <button class="nav-button" type="button" data-view="contact">Contact</button>
+      </nav>
+
+      <button class="button button-primary header-cta" type="button" data-view="contact">
+        <span>Let's Connect</span><i class="bx bx-arrow-up-right" aria-hidden="true"></i>
+      </button>
+    </header>
+
+    <main class="screen-stage">
+      <div class="content-region" id="content-region" aria-live="polite" aria-atomic="true"></div>
+    </main>
+    <span class="screen-grain" aria-hidden="true"></span>
+  </div>
+
+  <template id="view-home">
+    <section class="view-panel home-view" aria-labelledby="home-title">
+      <div class="gauge-cluster gauge-left" aria-hidden="true">
+        <div class="instrument-dial gauge-primary">
+          <span class="dial-label dial-label-low">10</span><span class="dial-label dial-label-high">100</span>
+          <span class="dial-needle"></span><span class="dial-hub"></span>
+        </div>
+      </div>
+
+      <div class="home-center-stack">
+        <div class="portrait-stage">
+          <div class="portrait-orbit" aria-hidden="true"></div>
+          <div class="portrait-frame">
+            <img class="portrait-image" id="portrait-image" alt="Portrait of Rhaine Kylle Balabag" hidden>
+          </div>
+        </div>
+
+        <div class="home-copy">
+          <h1 class="home-name" id="home-title" aria-label="Rhaine Kylle Balabag"><span class="typed-output" aria-hidden="true"></span><span class="typing-caret" aria-hidden="true"></span></h1>
+          <p class="hero-heading"><span class="role-accent">IT STUDENT</span> AND ASPIRING DEVELOPER</p>
+          <div class="home-socials" id="home-socials" aria-label="Social profiles"></div>
+          <div class="hero-actions">
+            <button class="button button-primary" type="button" data-view="projects"><span>Explore My Work</span><i class="bx bx-right-arrow-alt" aria-hidden="true"></i></button>
+            <button class="button button-secondary" id="cv-button" type="button" disabled title="Add your real CV path to portfolio.cvUrl in script.js to enable downloads."><i class="bx bx-download" aria-hidden="true"></i><span>Download CV</span></button>
+          </div>
+          <div class="quick-facts" aria-label="Explore more">
+            <button class="fact-card" type="button" data-view="education"><span class="fact-icon"><i class="bx bx-book-open" aria-hidden="true"></i></span><span><strong>IT Student</strong><small>Building my foundation</small></span></button>
+            <button class="fact-card" type="button" data-view="projects"><span class="fact-icon"><i class="bx bx-code-alt" aria-hidden="true"></i></span><span><strong>Web Development</strong><small>Learning by creating</small></span></button>
+            <button class="fact-card" type="button" data-view="skills"><span class="fact-icon"><i class="bx bx-refresh" aria-hidden="true"></i></span><span><strong>Continuous Learning</strong><small>One step at a time</small></span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="gauge-cluster gauge-right" aria-hidden="true">
+        <div class="instrument-dial gauge-primary">
+          <span class="dial-label dial-label-low">10</span><span class="dial-label dial-label-high">100</span>
+          <span class="dial-needle"></span><span class="dial-hub"></span>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="view-about">
+    <section class="view-panel inner-view" aria-labelledby="about-title">
+      <div class="section-heading">
+        <p class="eyebrow"><span class="eyebrow-line"></span> A LITTLE ABOUT ME</p>
+        <h1 id="about-title">Getting curious.<br><span>Growing every day.</span></h1>
+        <p class="section-lede">I'm Rhaine, a first-year IT student from Baguio City, Philippines. I'm at the start of my journey—and excited to see where curiosity and consistent practice can take me.</p>
+      </div>
+      <div class="about-grid">
+        <article class="info-card about-card">
+          <span class="card-overline"><i class="bx bx-compass" aria-hidden="true"></i> WHAT DRAWS ME IN</span>
+          <h2>Technology with a human side.</h2>
+          <p>I enjoy exploring how technology, programming, and thoughtful design can come together to make useful, welcoming digital experiences.</p>
+        </article>
+        <article class="info-card about-card about-card-accent">
+          <span class="card-overline"><i class="bx bx-target-lock" aria-hidden="true"></i> WHAT I'M WORKING TOWARD</span>
+          <h2>Learn the fundamentals. Keep building.</h2>
+          <p>My goal is to strengthen my IT foundations, practice web development, and grow more confident turning ideas into simple, meaningful projects.</p>
+        </article>
+      </div>
+      <div class="section-footnote"><span class="note-dot"></span> A work in progress—in the best way.</div>
+    </section>
+  </template>
+
+  <template id="view-skills">
+    <section class="view-panel inner-view" aria-labelledby="skills-title">
+      <div class="section-heading split-heading">
+        <div><p class="eyebrow"><span class="eyebrow-line"></span> THINGS I'M EXPLORING</p><h1 id="skills-title">Learning, <span>by doing.</span></h1></div>
+        <p class="section-lede">This is a starting point, not a scorecard. I'll update these as I practice and learn.</p>
+      </div>
+      <div class="skills-grid" id="skills-grid"></div>
+      <div class="section-footnote"><i class="bx bx-info-circle" aria-hidden="true"></i> Proficiency percentages are intentionally left out.</div>
+    </section>
+  </template>
+
+  <template id="view-projects">
+    <section class="view-panel inner-view" aria-labelledby="projects-title">
+      <div class="section-heading split-heading">
+        <div><p class="eyebrow"><span class="eyebrow-line"></span> A FEW THINGS I'M WORKING ON</p><h1 id="projects-title">Made while <span>learning.</span></h1></div>
+        <p class="section-lede">Project details are placeholders until I add real academic or personal work.</p>
+      </div>
+      <div class="projects-grid" id="projects-grid"></div>
+      <div class="section-footnote"><i class="bx bx-pencil" aria-hidden="true"></i> Replace each card with a project you can share.</div>
+    </section>
+  </template>
+
+  <template id="view-education">
+    <section class="view-panel inner-view" aria-labelledby="education-title">
+      <div class="section-heading">
+        <p class="eyebrow"><span class="eyebrow-line"></span> WHERE I'M LEARNING</p>
+        <h1 id="education-title">My <span>education.</span></h1>
+        <p class="section-lede">The beginning of my journey in information technology.</p>
+      </div>
+      <div class="education-list">
+        <article class="education-card">
+          <span class="education-marker"><i class="bx bx-book-reader" aria-hidden="true"></i></span>
+          <div><span class="card-overline">CURRENT STUDIES</span><h2>Bachelor of Science in Information Technology</h2><p>University of the Cordilleras</p></div>
+          <span class="education-status">First year</span>
+        </article>
+        <article class="education-card">
+          <span class="education-marker"><i class="bx bx-school" aria-hidden="true"></i></span>
+          <div><span class="card-overline">PREVIOUS EDUCATION</span><h2>Baguio City High School</h2></div>
+          <span class="education-status">Earlier</span>
+        </article>
+      </div>
+      <div class="section-footnote"><i class="bx bx-map-pin" aria-hidden="true"></i> Based in Baguio City, Philippines.</div>
+    </section>
+  </template>
+
+  <template id="view-contact">
+    <section class="view-panel inner-view contact-view" aria-labelledby="contact-title">
+      <div class="contact-intro">
+        <p class="eyebrow"><span class="eyebrow-line"></span> SAY HELLO</p>
+        <h1 id="contact-title">Let's make a<br><span>connection.</span></h1>
+        <p class="section-lede">Have a question or want to talk about technology and learning? I'd be happy to hear from you.</p>
+        <button class="button button-primary contact-cta" id="email-button" type="button" disabled title="Add your email address in script.js"><span>Get in Touch</span><i class="bx bx-right-arrow-alt" aria-hidden="true"></i></button>
+      </div>
+      <div class="contact-card info-card">
+        <span class="card-overline"><i class="bx bx-link-alt" aria-hidden="true"></i> FIND ME ONLINE</span>
+        <div class="contact-list" id="contact-list"></div>
+        <p class="contact-hint"><i class="bx bx-lock-alt" aria-hidden="true"></i> Contact links stay inactive until you add your real details.</p>
+      </div>
+    </section>
+  </template>
+
+  <template id="view-project-detail">
+    <section class="view-panel inner-view detail-view" aria-labelledby="project-detail-title">
+      <button class="back-button" type="button" data-view="projects"><i class="bx bx-arrow-back" aria-hidden="true"></i> Back to projects</button>
+      <div class="detail-layout">
+        <div class="detail-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> PROJECT NOTES</p>
+          <h1 id="project-detail-title">Project details</h1>
+          <p class="section-lede" id="project-detail-description"></p>
+          <div class="detail-tech" id="project-detail-tech"></div>
+        </div>
+        <div class="detail-placeholder"><i class="bx bx-layer" aria-hidden="true"></i><span>PROJECT PREVIEW</span><small>Add a screenshot when you have one to share.</small></div>
+      </div>
+    </section>
+  </template>
+</body>
+</html>
