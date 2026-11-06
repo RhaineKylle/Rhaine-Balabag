@@ -1,12 +1,12 @@
 /*
- * EDITABLE PROFILE CONTENT
- * Replace the empty URLs only with your real profile links and file paths.
- * The supplied portrait is in assets/rhaine-portrait.jpg for local file use.
- * The hosted portrait path is in portraitUrl; keep both paths in sync if replacing it.
+ * EDITABLE PORTFOLIO CONTENT
+ * Keep personal details, achievements, and file paths accurate to what you want to share.
  */
 const portfolio = {
   portraitUrl: "/manus-storage/rhaine-portrait_f0ce9a52.jpg",
-  portraitLocalUrl: "assets/rhaine-portrait.jpg",
+  portraitLocalUrl: "assets/images/home/portrait.jpg",
+  aboutPhotoUrl: "/manus-storage/picture-1_38cb3810.jpg",
+  aboutPhotoLocalUrl: "assets/images/about/picture-1.jpg",
   cvUrl: "",
   email: "",
   socials: [
@@ -14,29 +14,176 @@ const portfolio = {
     { name: "GitHub", url: "", icon: "bxl-github" },
     { name: "LinkedIn", url: "", icon: "bxl-linkedin" }
   ],
-  skills: [
-    { name: "Programming", status: "Learning", icon: "bx-code-alt" },
-    { name: "Web Development", status: "Learning", icon: "bx-code-block" },
-    { name: "UI/UX Design", status: "Exploring", icon: "bx-palette" },
-    { name: "Problem-Solving", status: "Developing", icon: "bx-bulb" }
-  ],
-  projects: [
+  aboutProfile: {
+    name: "Rhaine Kylle Balabag",
+    birthDate: "2007-11-26",
+    birthday: "November 26, 2007",
+    location: "Poblacion Tuba, Benguet, Philippines",
+    college: "University of the Cordilleras",
+    course: "Bachelor of Science in Information Technology",
+    specialization: "Network Security",
+    yearLevel: "First Year",
+    hobbies: ["Performing", "Digital design", "Learning new things"],
+    interests: ["Programming", "Mathematics", "Research", "Creativity", "Everyday technology"],
+    skills: ["Analytical thinking", "Problem-solving", "Communication", "Teamwork", "Adaptability", "Creativity"],
+    technicalSkills: ["Basic programming", "Computer applications", "Digital design"],
+    statement: "I am a curious, creative, and goal-oriented individual who enjoys exploring new ideas and taking on challenges. I value continuous learning and believe that every experience is an opportunity to improve myself. As I continue my journey in Information Technology, I hope to strengthen my technical abilities, gain practical experience, and develop solutions that combine creativity and functionality. I am always willing to learn, adapt, collaborate, and contribute my ideas to every opportunity that comes my way."
+  },
+  schools: [
     {
-      title: "Add a project title",
-      description: "Replace this with a short description of an academic or personal project you have actually worked on.",
-      technologies: ["Add technologies"],
-      icon: "bx-layer"
+      level: "Elementary",
+      achievementKey: "elementary",
+      school: "Apolinario Mabini Elementary School",
+      mark: "AM",
+      logoPath: "assets/images/education/apolinario-mabini-logo.jpg",
+      logoHostedPath: "/manus-storage/apolinario-mabini-logo_6fe87006.jpg",
+      program: "Elementary education",
+      status: "Elementary",
+      description: "My elementary years were where I began developing my academic foundation and discovering my interests in learning, particularly in mathematics."
     },
     {
-      title: "Add another project",
-      description: "Share what you made, what you learned, and what you might improve next. Keep it genuine and your own.",
-      technologies: ["Add technologies"],
-      icon: "bx-code-curly"
+      level: "Junior High School",
+      achievementKey: "junior",
+      school: "Baguio City High School",
+      mark: "BCHS",
+      logoPath: "assets/images/education/baguio-city-high-school-logo.png",
+      logoHostedPath: "/manus-storage/baguio-city-high-school-logo_f634932f.png",
+      program: "Junior High School",
+      status: "Junior High School",
+      description: "My junior high school years helped strengthen my academic foundation, particularly in mathematics and problem-solving. This was also when I became more involved in academic competitions and student leadership."
+    },
+    {
+      level: "Senior High School",
+      achievementKey: "senior",
+      school: "Baguio City High School",
+      mark: "BCHS",
+      logoPath: "assets/images/education/baguio-city-high-school-logo.png",
+      logoHostedPath: "/manus-storage/baguio-city-high-school-logo_f634932f.png",
+      program: "Science, Technology, Engineering, and Mathematics (STEM) strand",
+      status: "Senior High School · STEM",
+      description: "My senior high school experience under the STEM strand further developed my interest in mathematics, research, science, and technology. It also allowed me to participate in leadership activities, research projects, and academic competitions."
+    },
+    {
+      level: "College",
+      achievementKey: "college",
+      school: "University of the Cordilleras",
+      mark: "UC",
+      logoPath: "assets/images/education/university-of-cordilleras-logo.png",
+      logoHostedPath: "/manus-storage/university-of-cordilleras-logo_87c43154.png",
+      program: "Bachelor of Science in Information Technology",
+      status: "Currently Studying · First Year",
+      description: "My current academic journey focuses on Information Technology, where I continue to explore programming, computing, software development, and the different possibilities of technology."
     }
-  ]
+  ],
+  achievementCategories: {
+    academics: {
+      letter: "A",
+      title: "ACADEMIC ACHIEVEMENTS",
+      overviewTitle: "ACADEMICS",
+      shortTitle: "Academics",
+      icon: "bx-award",
+      summary: "Academic recognition from elementary school through senior high school.",
+      levels: {
+        elementary: {
+          groups: [{ heading: "Elementary", items: ["Consistent Honor Student from Grades 1 to 6."] }]
+        },
+        junior: {
+          groups: [{ heading: "Junior High School", items: ["Honor Student, Grades 7 to 9.", "Batch Valedictorian, Grade 10.", "Mathematics Awardee, Grade 10."] }]
+        },
+        senior: {
+          groups: [
+            { heading: "Grade 11", items: ["Honor Student."] },
+            { heading: "Grade 12", items: ["Honor Student.", "Mathematics Awardee.", "Best in Capstone Research.", "Leadership Awardee."] }
+          ]
+        },
+        college: {
+          groups: [{ heading: "College", items: ["No college awards or academic distinctions have been added yet; this section remains open for future updates."] }]
+        }
+      }
+    },
+    competitions: {
+      letter: "B",
+      title: "ACADEMIC COMPETITIONS",
+      overviewTitle: "COMPETITIONS",
+      shortTitle: "Competitions",
+      icon: "bx-trophy",
+      summary: "Participation and regional-level experiences in academic competitions.",
+      levels: {
+        elementary: {
+          groups: [{ heading: "Elementary · Participated in", items: ["DaMath.", "MTAP.", "Mathematics Quiz Bee."] }]
+        },
+        junior: {
+          groups: [{ heading: "Junior High School · Participated in", items: ["Mathematical Investigation (Problem-Based), reaching the Regional level.", "Mathematics Quiz Bee."] }]
+        },
+        senior: {
+          groups: [{ heading: "Senior High School · Participated in", items: ["Mathematical Investigation (Research-Based), reaching the Regional level.", "Science Quiz Bee.", "Mathematics Quiz Bee."] }]
+        },
+        college: {
+          groups: [{ heading: "College", items: ["This section is open for future competition entries."] }]
+        }
+      }
+    },
+    leadership: {
+      letter: "C",
+      title: "LEADERSHIP & ORGANIZATIONAL INVOLVEMENT",
+      overviewTitle: "LEADERSHIP",
+      shortTitle: "Leadership",
+      icon: "bx-group",
+      summary: "Student roles, proposed Math Club initiatives, and skills developed through involvement.",
+      levels: {
+        elementary: {
+          groups: [{ heading: "Elementary", items: ["Consistently served as a Class Officer."] }]
+        },
+        junior: {
+          groups: [{ heading: "Junior High School", items: ["Class Officer.", "Math Club Secretary."] }]
+        },
+        senior: {
+          groups: [
+            { heading: "Senior High School roles", items: ["Class Secretary.", "Math Club Secretary."] },
+            { heading: "Proposed Math Club initiatives", items: ["Clean and Green initiatives.", "Donation Drives.", "Event Booths."], note: "These were proposed projects or initiatives, not necessarily completed projects." },
+            { heading: "Skills developed", items: ["Organization.", "Responsibility.", "Teamwork.", "Communication.", "Initiative.", "Collaboration."] }
+          ]
+        },
+        college: {
+          groups: [{ heading: "College", items: ["Open for future leadership experiences. No current college positions or organizational memberships have been added."] }]
+        }
+      }
+    },
+    programs: {
+      letter: "D",
+      title: "PROGRAMMING, RESEARCH & TECHNOLOGY",
+      overviewTitle: "PROGRAMS & COMPUTER-RELATED PROJECTS",
+      shortTitle: "Programs & Projects",
+      icon: "bx-laptop",
+      summary: "Academic research and computer-related work, with space for future projects.",
+      levels: {
+        elementary: {
+          groups: [{ heading: "Elementary", items: ["No computer-related projects have been added for this level yet."] }]
+        },
+        junior: {
+          groups: [{ heading: "Junior High School", items: ["No computer-related projects have been added for this level yet."] }]
+        },
+        senior: {
+          groups: [{ heading: "Grade 12 · Senior High School", items: ["Research and Computer-Related Project."] }],
+          project: {
+            name: "BAGUIO BREAKTHROUGH",
+            title: "Optimizing Shortest Routes to Parks in the City of Baguio Using Bellman-Ford Algorithm.",
+            description: "This research explored the use of the Bellman-Ford algorithm to identify optimized routes connecting selected parks and destinations in Baguio City. It demonstrated how graph theory and computer algorithms can be applied to practical routing problems.",
+            concepts: ["Bellman-Ford Algorithm", "Graph Theory", "Shortest-Path Optimization", "Route Analysis", "Computer Science Applications"],
+            resources: ["Research documentation", "Project photographs", "Graphs and diagrams", "Presentation materials", "Research papers"]
+          },
+          futureProjects: ["Programming exercises", "Java projects", "Radix conversion", "Logic circuit simulations"]
+        },
+        college: {
+          groups: [{ heading: "College", items: ["Open for future computer-related project entries. No additional college projects have been added yet."] }]
+        }
+      }
+    }
+  }
 };
 
-const allowedViews = new Set(["home", "about", "skills", "projects", "education", "contact"]);
+const mainViews = new Set(["home", "about", "education", "family-friends"]);
+const detailViews = new Set(["education-detail"]);
 const contentRegion = document.getElementById("content-region");
 const navButtons = [...document.querySelectorAll(".nav-button")];
 let transitionToken = 0;
@@ -128,83 +275,6 @@ function typeHomeName() {
   window.setTimeout(typeCharacter, 180);
 }
 
-function renderSkills() {
-  const host = document.getElementById("skills-grid");
-  if (!host) return;
-  portfolio.skills.forEach((skill) => {
-    const card = document.createElement("article");
-    card.className = "skill-card";
-    card.innerHTML = `<span class="skill-icon"><i class="bx ${skill.icon}" aria-hidden="true"></i></span><div><h2 class="skill-name"></h2><span class="skill-status"></span></div>`;
-    card.querySelector(".skill-name").textContent = skill.name;
-    card.querySelector(".skill-status").textContent = skill.status;
-    host.append(card);
-  });
-}
-
-function renderProjects() {
-  const host = document.getElementById("projects-grid");
-  if (!host) return;
-  portfolio.projects.forEach((project, index) => {
-    const card = document.createElement("article");
-    card.className = "project-card";
-    const art = document.createElement("div");
-    art.className = "project-art";
-    art.setAttribute("aria-hidden", "true");
-    const icon = document.createElement("i");
-    icon.className = `bx ${project.icon || "bx-layer"}`;
-    art.append(icon);
-    const copy = document.createElement("div");
-    copy.className = "project-card-copy";
-    const number = document.createElement("span");
-    number.className = "project-number";
-    number.textContent = `PROJECT 0${index + 1} · PLACEHOLDER`;
-    const title = document.createElement("h2");
-    title.textContent = project.title;
-    const description = document.createElement("p");
-    description.textContent = project.description;
-    const tags = document.createElement("div");
-    tags.className = "tech-list";
-    (project.technologies || []).forEach((technology) => {
-      const tag = document.createElement("span");
-      tag.className = "tech-tag";
-      tag.textContent = technology;
-      tags.append(tag);
-    });
-    const details = document.createElement("button");
-    details.type = "button";
-    details.className = "project-detail-button";
-    details.innerHTML = 'View project notes <i class="bx bx-right-arrow-alt" aria-hidden="true"></i>';
-    details.addEventListener("click", () => openProject(index));
-    copy.append(number, title, description, tags, details);
-    card.append(art, copy);
-    host.append(card);
-  });
-}
-
-function renderContact() {
-  const host = document.getElementById("contact-list");
-  if (!host) return;
-  const normalizedEmail = String(portfolio.email || "").trim();
-  const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail);
-  const emailRow = document.createElement(emailIsValid ? "a" : "div");
-  emailRow.className = `contact-row${emailIsValid ? " is-configured" : " is-unavailable"}`;
-  if (emailIsValid) {
-    emailRow.href = `mailto:${normalizedEmail}`;
-    emailRow.setAttribute("aria-label", `Email ${normalizedEmail}`);
-  }
-  emailRow.innerHTML = `<span class="contact-icon"><i class="bx bx-envelope" aria-hidden="true"></i></span><span class="contact-label">Email</span><span class="contact-value"></span>`;
-  emailRow.querySelector(".contact-value").textContent = emailIsValid ? normalizedEmail : "Add your email address";
-  host.append(emailRow);
-  portfolio.socials.forEach((profile) => host.append(makeSocialControl(profile, true)));
-
-  const emailButton = document.getElementById("email-button");
-  if (emailButton && emailIsValid) {
-    emailButton.disabled = false;
-    emailButton.removeAttribute("title");
-    emailButton.addEventListener("click", () => { window.location.href = `mailto:${normalizedEmail}`; });
-  }
-}
-
 function renderPortrait() {
   const localUrl = String(portfolio.portraitLocalUrl || "").trim();
   const hostedUrl = String(portfolio.portraitUrl || "").trim();
@@ -212,9 +282,7 @@ function renderPortrait() {
   if (!url) return;
   const image = document.getElementById("portrait-image");
   if (!image) return;
-  image.addEventListener("load", () => {
-    image.hidden = false;
-  }, { once: true });
+  image.addEventListener("load", () => { image.hidden = false; }, { once: true });
   image.addEventListener("error", () => {
     if (url !== localUrl && localUrl) {
       image.src = localUrl;
@@ -227,8 +295,280 @@ function renderPortrait() {
   image.src = url;
 }
 
+function calculateAge(birthDate) {
+  const parts = String(birthDate || "").split("-").map(Number);
+  if (parts.length !== 3 || parts.some((part) => !Number.isInteger(part))) return "";
+  const [birthYear, birthMonth, birthDay] = parts;
+  const today = new Date();
+  let age = today.getFullYear() - birthYear;
+  if (today.getMonth() + 1 < birthMonth || (today.getMonth() + 1 === birthMonth && today.getDate() < birthDay)) age -= 1;
+  return age >= 0 ? age : "";
+}
+
+function setAboutText(id, value) {
+  const element = document.getElementById(id);
+  if (element) element.textContent = value;
+}
+
+function renderAboutList(id, items) {
+  const host = document.getElementById(id);
+  if (!host) return;
+  host.replaceChildren();
+  items.forEach((item) => {
+    const chip = document.createElement("li");
+    chip.textContent = item;
+    host.append(chip);
+  });
+}
+
+function renderAbout() {
+  const factsHost = document.getElementById("about-facts");
+  if (!factsHost) return;
+
+  const profile = portfolio.aboutProfile;
+  const lastSpace = profile.name.lastIndexOf(" ");
+  setAboutText("about-name-first", lastSpace > 0 ? profile.name.slice(0, lastSpace) : profile.name);
+  setAboutText("about-name-last", lastSpace > 0 ? profile.name.slice(lastSpace + 1) : "");
+  setAboutText("about-role", `${profile.yearLevel} · ${profile.specialization}`);
+
+  factsHost.replaceChildren();
+  [
+    { label: "Birthday", value: profile.birthday },
+    { label: "Age", value: `${calculateAge(profile.birthDate)} years old` },
+    { label: "Location", value: profile.location }
+  ].forEach(({ label, value }) => {
+    const fact = document.createElement("div");
+    fact.className = "about-fact";
+    const term = document.createElement("dt");
+    term.textContent = label;
+    const detail = document.createElement("dd");
+    detail.textContent = value;
+    fact.append(term, detail);
+    factsHost.append(fact);
+  });
+
+  setAboutText("about-college", profile.college);
+  setAboutText("about-course", `${profile.course} - ${profile.specialization}`);
+  setAboutText("about-year", profile.yearLevel);
+  setAboutText("about-statement", profile.statement);
+  renderAboutList("about-hobbies", profile.hobbies);
+  renderAboutList("about-interests", profile.interests);
+  renderAboutList("about-skills", profile.skills);
+  renderAboutList("about-technical-skills", profile.technicalSkills);
+
+  const photo = document.querySelector(".about-profile-photo");
+  const localPhotoUrl = String(portfolio.aboutPhotoLocalUrl || "").trim();
+  const hostedPhotoUrl = String(portfolio.aboutPhotoUrl || "").trim();
+  if (photo) {
+    const photoUrl = window.location.protocol === "file:" ? localPhotoUrl : (safeUrl(hostedPhotoUrl) || localPhotoUrl);
+    photo.addEventListener("load", () => { photo.hidden = false; }, { once: true });
+    photo.addEventListener("error", () => {
+      if (photoUrl !== localPhotoUrl && localPhotoUrl) {
+        photo.src = localPhotoUrl;
+        return;
+      }
+      photo.hidden = true;
+    }, { once: true });
+    if (photoUrl) photo.src = photoUrl;
+  }
+}
+
+function makeSchoolMark(school, imageId = null) {
+  const wrapper = document.createElement("span");
+  wrapper.className = "school-mark-wrap";
+  const mark = document.createElement("span");
+  mark.className = "school-logo-placeholder";
+  const initials = document.createElement("strong");
+  initials.textContent = school.mark;
+  const caption = document.createElement("small");
+  caption.textContent = "SCHOOL LOGO";
+  mark.append(initials, caption);
+  wrapper.append(mark);
+
+  const localUrl = String(school.logoPath || "").trim();
+  const hostedUrl = String(school.logoHostedPath || "").trim();
+  const initialUrl = window.location.protocol === "file:" ? localUrl : (safeUrl(hostedUrl) || localUrl);
+  const loadLogo = (image) => {
+    const setSource = (source, isFallback = false) => {
+      image.onload = () => { image.hidden = false; mark.hidden = true; };
+      image.onerror = () => {
+        if (!isFallback && localUrl && source !== localUrl) {
+          setSource(localUrl, true);
+          return;
+        }
+        image.hidden = true;
+        mark.hidden = false;
+      };
+      image.src = source;
+    };
+    if (initialUrl) setSource(initialUrl);
+    else { image.hidden = true; mark.hidden = false; }
+  };
+
+  if (imageId) {
+    const image = document.getElementById(imageId);
+    if (image) {
+      image.alt = `${school.school} logo`;
+      loadLogo(image);
+    }
+  } else {
+    const image = document.createElement("img");
+    image.className = "school-logo-image";
+    image.alt = `${school.school} logo`;
+    image.hidden = true;
+    loadLogo(image);
+    wrapper.append(image);
+  }
+  return wrapper;
+}
+
+function renderEducationCards() {
+  const host = document.getElementById("school-grid");
+  if (!host) return;
+  portfolio.schools.forEach((school, index) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "school-card";
+    card.dataset.schoolIndex = String(index);
+    card.setAttribute("aria-label", `${school.level}: ${school.school}. Open details and achievements.`);
+    card.append(makeSchoolMark(school));
+
+    const copy = document.createElement("span");
+    copy.className = "school-card-copy";
+    const level = document.createElement("span");
+    level.className = "school-card-level";
+    level.textContent = school.level;
+    const name = document.createElement("strong");
+    name.textContent = school.school;
+    const program = document.createElement("small");
+    program.textContent = school.program;
+    const open = document.createElement("span");
+    open.className = "school-card-open";
+    open.innerHTML = 'View achievements <i class="bx bx-right-arrow-alt" aria-hidden="true"></i>';
+    copy.append(level, name, program, open);
+    card.append(copy);
+    host.append(card);
+  });
+}
+
+function renderEducationDetail(schoolIndex) {
+  const school = portfolio.schools[schoolIndex];
+  if (!school) return false;
+  const name = document.getElementById("school-detail-name");
+  const level = document.getElementById("school-detail-level");
+  const program = document.getElementById("school-detail-program");
+  const status = document.getElementById("school-detail-status");
+  const description = document.getElementById("school-detail-description");
+  const mark = document.getElementById("school-detail-mark");
+  const logoImage = document.getElementById("school-detail-logo");
+  const logoPlaceholder = document.getElementById("school-detail-logo-placeholder");
+  if (!name || !level || !program || !status || !description || !mark || !logoImage || !logoPlaceholder) return false;
+  name.textContent = school.school;
+  level.textContent = school.level.toUpperCase();
+  program.textContent = school.program;
+  status.textContent = school.status;
+  description.textContent = school.description;
+  mark.textContent = school.mark;
+  const localUrl = String(school.logoPath || "").trim();
+  const hostedUrl = String(school.logoHostedPath || "").trim();
+  const initialUrl = window.location.protocol === "file:" ? localUrl : (safeUrl(hostedUrl) || localUrl);
+  const setSource = (source, isFallback = false) => {
+    logoImage.onload = () => { logoImage.hidden = false; logoPlaceholder.hidden = true; };
+    logoImage.onerror = () => {
+      if (!isFallback && localUrl && source !== localUrl) {
+        setSource(localUrl, true);
+        return;
+      }
+      logoImage.hidden = true;
+      logoPlaceholder.hidden = false;
+    };
+    logoImage.src = source;
+  };
+  if (initialUrl) setSource(initialUrl);
+  else { logoImage.hidden = true; logoPlaceholder.hidden = false; }
+  renderSchoolAchievements(school);
+  return true;
+}
+
+function renderSchoolAchievements(school) {
+  const host = document.getElementById("school-achievements");
+  if (!host) return;
+  host.replaceChildren();
+
+  Object.values(portfolio.achievementCategories).forEach((category) => {
+    const level = category.levels[school.achievementKey];
+    if (!level) return;
+    const groups = (level.groups || []).map((group) => ({
+      ...group,
+      items: group.items.filter((item) => !/open for future|no .* have been added|no .* added/i.test(item))
+    })).filter((group) => group.items.length);
+    if (!groups.length && !level.project) return;
+
+    const card = document.createElement("article");
+    card.className = "school-achievement-card";
+    const header = document.createElement("div");
+    header.className = "school-achievement-card-header";
+    const mark = document.createElement("span");
+    mark.className = "school-achievement-mark";
+    mark.textContent = category.letter;
+    const title = document.createElement("h3");
+    title.textContent = category.shortTitle;
+    const icon = document.createElement("i");
+    icon.className = `bx ${category.icon}`;
+    icon.setAttribute("aria-hidden", "true");
+    header.append(mark, title, icon);
+    card.append(header);
+    groups.forEach((group) => card.append(createAchievementGroup(group)));
+
+    if (level.project) {
+      const project = document.createElement("article");
+      project.className = "school-research-card";
+      const label = document.createElement("p");
+      label.className = "research-overline";
+      label.textContent = level.project.name;
+      const projectTitle = document.createElement("h4");
+      projectTitle.textContent = level.project.title;
+      const description = document.createElement("p");
+      description.className = "research-description";
+      description.textContent = level.project.description;
+      project.append(label, projectTitle, description);
+      card.append(project);
+    }
+    host.append(card);
+  });
+
+  if (!host.childElementCount) {
+    const empty = document.createElement("p");
+    empty.className = "school-achievements-empty";
+    empty.textContent = "No achievements have been added for this school yet.";
+    host.append(empty);
+  }
+}
+
+function createAchievementGroup(group) {
+  const section = document.createElement("section");
+  section.className = "achievement-group";
+  const title = document.createElement("h3");
+  title.textContent = group.heading;
+  section.append(title);
+  const list = document.createElement("ul");
+  group.items.forEach((item) => {
+    const entry = document.createElement("li");
+    entry.textContent = item;
+    list.append(entry);
+  });
+  section.append(list);
+  if (group.note) {
+    const note = document.createElement("p");
+    note.className = "achievement-note";
+    note.textContent = group.note;
+    section.append(note);
+  }
+  return section;
+}
+
 function markActiveView(view) {
-  const activeView = view === "project-detail" ? "projects" : view;
+  const activeView = view === "education-detail" ? "education" : view;
   navButtons.forEach((button) => {
     const isActive = button.dataset.view === activeView;
     button.classList.toggle("is-active", isActive);
@@ -237,43 +577,38 @@ function markActiveView(view) {
   });
 }
 
-function copyProjectDetails(index) {
-  const project = portfolio.projects[index];
-  if (!project) return false;
-  const title = document.getElementById("project-detail-title");
-  const description = document.getElementById("project-detail-description");
-  const tech = document.getElementById("project-detail-tech");
-  if (!title || !description || !tech) return false;
-  title.textContent = project.title;
-  description.textContent = project.description;
-  (project.technologies || []).forEach((technology) => {
-    const tag = document.createElement("span");
-    tag.className = "tech-tag";
-    tag.textContent = technology;
-    tech.append(tag);
-  });
-  return true;
-}
-
-function showView(view, { projectIndex = null, shouldAnimate = true } = {}) {
-  const isProjectDetail = view === "project-detail";
-  if (!isProjectDetail && !allowedViews.has(view)) view = "home";
-  if (isProjectDetail && !portfolio.projects[projectIndex]) view = "projects";
+function showView(view, { schoolIndex = null, shouldAnimate = true } = {}) {
+  if (!mainViews.has(view) && !detailViews.has(view)) view = "home";
+  if (view === "education-detail" && !portfolio.schools[schoolIndex]) view = "education";
   const token = ++transitionToken;
   if (shouldAnimate && contentRegion.firstElementChild) contentRegion.classList.add("is-leaving");
   const delay = shouldAnimate && contentRegion.firstElementChild ? 125 : 0;
   window.setTimeout(() => {
     if (token !== transitionToken) return;
-    const template = document.getElementById(isProjectDetail && view === "project-detail" ? "view-project-detail" : `view-${view}`);
+    const template = document.getElementById(`view-${view}`);
     if (!template) return;
     contentRegion.classList.remove("is-leaving", "is-visible");
     contentRegion.replaceChildren(template.content.cloneNode(true));
-    if (isProjectDetail && view === "project-detail") copyProjectDetails(projectIndex);
-    if (view === "home") { renderHomeSocials(); configureCvButton(); renderPortrait(); typeHomeName(); }
-    if (view === "skills") renderSkills();
-    if (view === "projects") renderProjects();
-    if (view === "contact") renderContact();
+
+    if (view === "home") {
+      renderHomeSocials();
+      configureCvButton();
+      renderPortrait();
+      typeHomeName();
+    } else if (view === "about") {
+      renderAbout();
+    } else if (view === "education") {
+      renderEducationCards();
+    } else if (view === "education-detail") {
+      renderEducationDetail(schoolIndex);
+    }
+
     markActiveView(view);
+    const heading = contentRegion.querySelector("h1");
+    if (heading && view !== "home") {
+      heading.tabIndex = -1;
+      heading.focus({ preventScroll: true });
+    }
     requestAnimationFrame(() => {
       if (token === transitionToken) contentRegion.classList.add("is-visible");
     });
@@ -282,59 +617,87 @@ function showView(view, { projectIndex = null, shouldAnimate = true } = {}) {
 
 function currentLocation() {
   const params = new URLSearchParams(window.location.search);
-  const requestedView = params.get("view") || "home";
-  const projectIndex = Number(params.get("project"));
-  if (requestedView === "project-detail" && Number.isInteger(projectIndex) && projectIndex >= 0) {
-    return { view: "project-detail", projectIndex };
+  const rawView = params.get("view") || "home";
+  const viewAliases = {
+    achievements: "education",
+    "achievement-category": "education",
+    family: "family-friends",
+    friends: "family-friends"
+  };
+  const requestedView = viewAliases[rawView] || rawView;
+  if (requestedView === "education-detail") {
+    const schoolParam = params.get("school");
+    const schoolIndex = schoolParam === null ? Number.NaN : Number(schoolParam);
+    if (Number.isInteger(schoolIndex) && portfolio.schools[schoolIndex]) return { view: requestedView, schoolIndex };
   }
-  return { view: allowedViews.has(requestedView) ? requestedView : "home" };
+  return { view: mainViews.has(requestedView) ? requestedView : "home" };
 }
 
-function updateAddress(view, projectIndex = null, replace = false) {
+function updateAddress(view, details = {}, replace = false) {
   const url = new URL(window.location.href);
-  if (view === "home") url.searchParams.delete("view");
-  else url.searchParams.set("view", view);
-  if (Number.isInteger(projectIndex)) url.searchParams.set("project", String(projectIndex));
-  else url.searchParams.delete("project");
-  const state = Number.isInteger(projectIndex) ? { view, projectIndex } : { view };
+  ["view", "school", "category", "level", "project", "returnToEducation"].forEach((key) => url.searchParams.delete(key));
+  if (view !== "home") url.searchParams.set("view", view);
+  Object.entries(details).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) url.searchParams.set(key, String(value));
+  });
+  const state = { view, ...details };
   window.history[replace ? "replaceState" : "pushState"](state, "", url);
 }
 
 function navigate(view) {
-  if (!allowedViews.has(view)) return;
-  if (currentLocation().view === view && !new URLSearchParams(location.search).has("project")) return;
+  if (!mainViews.has(view)) return;
+  const current = currentLocation();
+  if (current.view === view) return;
   updateAddress(view);
   showView(view);
 }
 
-function openProject(index) {
-  if (!portfolio.projects[index]) return;
-  updateAddress("project-detail", index);
-  showView("project-detail", { projectIndex: index });
+function openEducationDetail(index) {
+  if (!portfolio.schools[index]) return;
+  updateAddress("education-detail", { school: index });
+  window.history.replaceState({ ...window.history.state, returnToEducation: true }, "", window.location.href);
+  showView("education-detail", { schoolIndex: index });
+}
+
+function closeEducationDetail() {
+  if (window.history.state?.view === "education-detail" && window.history.state?.returnToEducation && window.history.length > 1) {
+    window.history.back();
+    return;
+  }
+  navigate("education");
 }
 
 document.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-view]");
-  if (!button || button.disabled) return;
+  const target = event.target instanceof Element ? event.target : event.target?.parentElement;
+  if (!target) return;
+
+  if (target.closest("#view-education-detail .back-button") || target.closest(".education-detail-page .back-button")) {
+    event.preventDefault();
+    closeEducationDetail();
+    return;
+  }
+
+  const schoolButton = target.closest("[data-school-index]");
+  if (schoolButton) {
+    openEducationDetail(Number(schoolButton.dataset.schoolIndex));
+    return;
+  }
+  const viewButton = target.closest("[data-view]");
+  if (!viewButton || viewButton.disabled) return;
   event.preventDefault();
-  navigate(button.dataset.view);
+  navigate(viewButton.dataset.view);
+});
+
+document.addEventListener("keydown", (event) => {
+  const current = currentLocation();
+  if (event.key === "Escape" && detailViews.has(current.view)) closeEducationDetail();
 });
 
 window.addEventListener("popstate", () => {
-  const locationState = currentLocation();
-  showView(locationState.view, { projectIndex: locationState.projectIndex ?? null });
-});
-
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && currentLocation().view === "project-detail") {
-    window.history.back();
-  }
+  const location = currentLocation();
+  showView(location.view, { ...location, shouldAnimate: true });
 });
 
 const initialLocation = currentLocation();
-window.history.replaceState(
-  initialLocation.view === "project-detail" ? { view: initialLocation.view, projectIndex: initialLocation.projectIndex } : { view: initialLocation.view },
-  "",
-  window.location.href
-);
-showView(initialLocation.view, { projectIndex: initialLocation.projectIndex ?? null, shouldAnimate: false });
+window.history.replaceState(initialLocation, "", window.location.href);
+showView(initialLocation.view, { ...initialLocation, shouldAnimate: false });
