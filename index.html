@@ -209,6 +209,7 @@
 
   <template id="view-education-detail">
     <section class="view-panel inner-view education-detail-page" aria-labelledby="school-detail-name">
+      <div class="detail-bg" id="school-detail-bg" aria-hidden="true"></div>
       <button class="back-button" type="button" data-view="education"><i class="bx bx-arrow-back" aria-hidden="true"></i> <span data-t="education.back">Back to Schools</span></button>
       <div class="education-detail-layout">
         <div class="education-detail-logo">
@@ -225,6 +226,8 @@
           <span class="education-detail-status" id="school-detail-status"></span>
           <p class="education-detail-description" id="school-detail-description"></p>
         </div>
+        <!-- Graduation photo: filled from gradPhotoPath / gradCaption in content.js (hidden when a school has none) -->
+        <figure class="education-grad" id="school-detail-grad" hidden><img alt=""><figcaption></figcaption></figure>
       </div>
       <section class="school-achievement-section" aria-labelledby="school-achievement-title">
         <h2 class="school-achievement-title" id="school-achievement-title" data-t="education.achievementsTitle">ACHIEVEMENTS AT THIS SCHOOL</h2>

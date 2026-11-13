@@ -2836,3 +2836,24 @@ body[data-view="education"] .screen-stage {
   .lightbox-prev { left: 18px; }
   .lightbox-next { right: 18px; }
 }
+
+/* --- Graduation photo on each school's detail page --- */
+.education-detail-layout { grid-template-columns: minmax(112px, .42fr) minmax(0, 1.58fr) auto !important; }
+.education-grad { position: relative; display: block; width: clamp(130px, 14vw, 190px); margin: 0; overflow: hidden; border: 2px solid rgba(255, 105, 68, .86); border-radius: 4px 18px 4px 18px; background: #11171b; box-shadow: 0 0 0 4px rgba(255, 92, 59, .1), 0 14px 34px rgba(0, 0, 0, .45); }
+.education-grad[hidden] { display: none; }
+.education-grad img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; }
+.education-grad figcaption { position: absolute; right: 0; bottom: 0; left: 0; padding: 18px 6px 7px; background: linear-gradient(transparent, rgba(5, 7, 8, .92)); color: #ffb09a; font: 700 9.5px var(--font-display); letter-spacing: .1em; text-align: center; }
+@media (max-width: 620px) { .education-grad { width: 86px; } .education-grad figcaption { font-size: 6px; padding-top: 10px; } }
+
+/* --- School building as the background of the detail page --- */
+.education-detail-page > :not(.detail-bg) { position: relative; z-index: 1; }
+.detail-bg { position: absolute; z-index: 0; inset: 0; background: center / cover no-repeat; opacity: .32; filter: saturate(.85); pointer-events: none; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, rgba(0,0,0,.35) 100%); mask-image: linear-gradient(180deg, #000 0%, #000 55%, rgba(0,0,0,.35) 100%); }
+.detail-bg::after { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8, 12, 15, .88) 0%, rgba(8, 12, 15, .55) 55%, rgba(8, 12, 15, .8) 100%); content: ''; }
+
+/* --- Graduation photo on the right side of each Achievements card --- */
+.stage-grad { position: relative; z-index: 3; width: 62px; flex: 0 0 62px; align-self: flex-end; margin: 0; overflow: hidden; border: 2px solid #ff6958; border-radius: 3px 12px 3px 12px; background: #11171b; box-shadow: 0 0 0 3px #0c0f11, 0 0 16px rgba(255, 105, 88, .3); }
+.stage-grad.has-image { display: block; }
+.stage-grad-image { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; }
+.stage-grad-image[hidden] { display: none; }
+.stage-grad:not(.has-image) { display: none; }
+.stage-head { align-items: flex-end; }

@@ -477,7 +477,8 @@ function makeEl(tag, className, text) {
 const STAGE_SECTIONS = [
   { key: "academics", icon: "bx-award" },
   { key: "competitions", icon: "bx-trophy" },
-  { key: "leadership", icon: "bx-group" }
+  { key: "leadership", icon: "bx-group" },
+  { key: "extracurricular", icon: "bx-compass" }
 ];
 /* Placeholder sentences such as "No awards added yet" are treated as empty. */
 const NOT_ADDED_YET = /^(no |this section is open|open for)/i;
@@ -538,6 +539,11 @@ function renderEducationCards() {
     title.append(makeEl("h2", "stage-name", school.stageName || school.school));
     if (school.years) title.append(makeEl("span", "stage-years", school.years));
     head.append(logo, title);
+    if (school.gradPhotoPath) {                       // graduation photo, right side of the card header
+      const grad = makeEl("figure", "stage-grad");
+      grad.append(makeSoftImage(school.gradPhotoPath, `${school.level} graduation photo`, "stage-grad-image"));
+      head.append(grad);
+    }
 
     const body = makeEl("div", "stage-body");
 
@@ -550,6 +556,7 @@ function renderEducationCards() {
       title.append(iconEl, document.createTextNode(` ${t.sections[key]}:`));
       const list = makeEl("ul", "stage-list");
       const items = stageItems(school, key);
+      if (!items.length && key === "extracurricular") return;   // only show Extracurricular when a school has entries
       if (items.length) items.forEach((text) => list.append(makeEl("li", "", text)));
       else list.append(makeEl("li", "is-empty", t.stageEmpty));
       section.append(title, list);
@@ -771,6 +778,20 @@ function renderEducationDetail(schoolIndex) {
   };
   if (initialUrl) setSource(initialUrl);
   else { logoImage.hidden = true; logoPlaceholder.hidden = false; }
+  const detailBg = document.getElementById("school-detail-bg");
+  if (detailBg && school.buildingPath) detailBg.style.backgroundImage = `url("${school.buildingPath}")`;
+  const grad = document.getElementById("school-detail-grad");
+  if (grad) {
+    const gradImage = grad.querySelector("img");
+    grad.hidden = true;
+    if (school.gradPhotoPath) {
+      gradImage.alt = `${school.level} graduation photo`;
+      gradImage.onload = () => { grad.hidden = false; fitView(); };
+      gradImage.onerror = () => { grad.hidden = true; };
+      grad.querySelector("figcaption").textContent = school.gradCaption || "GRADUATION";
+      gradImage.src = school.gradPhotoPath;
+    }
+  }
   renderSchoolAchievements(school);
   return true;
 }
