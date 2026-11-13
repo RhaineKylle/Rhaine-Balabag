@@ -822,6 +822,7 @@ function renderCertificates() {
       thumb.append(makeEl("span", "cert-placeholder", String(index + 1).padStart(2, "0")));
       thumb.append(makeSoftImage(item.image, item.title, "cert-image"));
       button.append(thumb);
+      button.append(makeEl("span", "cert-cap", item.title));   /* little caption that moves with the certificate */
       track.append(button);
     });
   });

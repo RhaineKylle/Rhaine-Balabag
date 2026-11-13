@@ -3016,3 +3016,9 @@ body[data-view="education"] .screen-stage {
 .achievements-page .cert-block { order: 0; }
 .cert-thumb { width: clamp(190px, 17vw, 300px); height: clamp(128px, 19vh, 205px); }
 .cert-track { gap: 16px; }
+
+/* Certificates: a little caption under each one, moving along with it */
+.cert-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.cert-cap { display: -webkit-box; width: clamp(190px, 17vw, 300px); overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  color: #c9d1d6; font: 600 clamp(10.5px, .8vw, 12.5px)/1.3 var(--font-body); text-align: center; text-shadow: 0 1px 2px #000; }
+.cert-thumb { height: clamp(112px, 16.5vh, 185px); }
