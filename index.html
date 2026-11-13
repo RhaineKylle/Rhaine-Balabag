@@ -68,6 +68,24 @@
     <main class="screen-stage">
       <div class="content-region" id="content-region" aria-live="polite" aria-atomic="true"></div>
     </main>
+
+    <!-- PREVIOUS / NEXT bar: lets visitors move through the tabs in order. Filled in by script.js (updatePager). -->
+    <nav class="page-pager" id="page-pager" aria-label="Page navigation">
+      <button class="pager-btn pager-prev" id="pager-prev" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        <span class="pager-text"><small class="pager-dir">Previous</small><strong class="pager-name"></strong></span>
+      </button>
+      <span class="pager-dots" id="pager-dots">
+        <button class="pager-dot" type="button" data-view="home" aria-label="Home"></button>
+        <button class="pager-dot" type="button" data-view="about" aria-label="Personal Information"></button>
+        <button class="pager-dot" type="button" data-view="education" aria-label="Achievements"></button>
+        <button class="pager-dot" type="button" data-view="family-friends" aria-label="Family &amp; Friends"></button>
+      </span>
+      <button class="pager-btn pager-next" id="pager-next" type="button">
+        <span class="pager-text"><small class="pager-dir">Next</small><strong class="pager-name"></strong></span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </nav>
     <span class="screen-grain" aria-hidden="true"></span>
   </div>
 
@@ -161,13 +179,31 @@
   </template>
 
   <template id="view-education">
-    <section class="view-panel inner-view collection-page education-page" aria-labelledby="education-title">
-      <header class="collection-page-header">
-        <p class="eyebrow"><span class="eyebrow-line"></span> <span data-t="education.eyebrow">EDUCATION &amp; ACHIEVEMENTS</span></p>
-        <h1 id="education-title" data-t="education.title">MY EDUCATIONAL <span>JOURNEY</span></h1>
-        <p class="section-lede" data-t="education.lede">Choose a school to see its story and achievements.</p>
+    <!-- ACHIEVEMENTS PAGE: 1) Educational stages  2) Certificates carousel  3) Diplomas.
+         The cards, certificates and diplomas are filled in by script.js from content.js. -->
+    <section class="view-panel inner-view achievements-page" aria-labelledby="education-title">
+      <header class="ach-heading">
+        <h1 id="education-title" data-t="education.stagesTitle" data-accent="ach-accent">EDUCATIONAL <span class="ach-accent">STAGES</span></h1>
       </header>
-      <div class="school-grid" id="school-grid" aria-label="Schools and their achievements"></div>
+
+      <!-- 1. Four school cards in one row -->
+      <div class="stage-grid" id="school-grid" aria-label="Educational stages"></div>
+
+      <!-- 2. Certificates carousel (arrows on both sides) -->
+      <section class="ach-block cert-block" aria-labelledby="cert-title">
+        <h2 class="ach-subheading" id="cert-title" data-t="education.certificatesTitle" data-accent="ach-accent"><span class="ach-accent">CERTIFICATES</span></h2>
+        <div class="cert-carousel" id="cert-carousel">
+          <button class="cert-arrow" id="cert-prev" type="button" aria-label="Previous certificates"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div class="cert-viewport"><div class="cert-track" id="cert-track"></div></div>
+          <button class="cert-arrow" id="cert-next" type="button" aria-label="Next certificates"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </section>
+
+      <!-- 3. Three larger diploma previews -->
+      <section class="ach-block dip-block" aria-labelledby="dip-title">
+        <h2 class="ach-subheading" id="dip-title" data-t="education.diplomasTitle" data-accent="ach-accent">DIPLOMAS &amp; <span class="ach-accent">ACADEMIC MILESTONES</span></h2>
+        <div class="dip-grid" id="dip-grid"></div>
+      </section>
     </section>
   </template>
 

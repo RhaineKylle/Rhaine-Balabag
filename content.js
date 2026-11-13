@@ -43,7 +43,10 @@ const portfolio = {
     {
       level: "Elementary",
       achievementKey: "elementary",
+      stageName: "Apolinario Mabini Elementary School",   // title shown on the Achievements card
+      years: "2014-2020",   // years shown under the title
       school: "Apolinario Mabini Elementary School",
+      buildingPath: "assets/images/education/buildings/apolinario-mabini.jpg",   // school building photo (shown inside the card)
       mark: "AM",
       logoPath: "assets/images/education/apolinario-mabini-logo.jpg",
       program: "Elementary education",
@@ -53,7 +56,10 @@ const portfolio = {
     {
       level: "Junior High School",
       achievementKey: "junior",
+      stageName: "Baguio City High School - Junior High",   // title shown on the Achievements card
+      years: "2020-2024",   // years shown under the title
       school: "Baguio City High School",
+      buildingPath: "assets/images/education/buildings/baguio-city-high-school.jpg",   // school building photo (shown inside the card)
       mark: "BCHS",
       logoPath: "assets/images/education/baguio-city-high-school-logo.png",
       program: "Junior High School",
@@ -63,7 +69,10 @@ const portfolio = {
     {
       level: "Senior High School",
       achievementKey: "senior",
+      stageName: "Baguio City High School - Senior High",   // title shown on the Achievements card
+      years: "2024-2026",   // years shown under the title
       school: "Baguio City High School",
+      buildingPath: "assets/images/education/buildings/baguio-city-high-school.jpg",   // school building photo (shown inside the card)
       mark: "BCHS",
       logoPath: "assets/images/education/baguio-city-high-school-logo.png",
       program: "Science, Technology, Engineering, and Mathematics (STEM) strand",
@@ -73,7 +82,10 @@ const portfolio = {
     {
       level: "College",
       achievementKey: "college",
+      stageName: "University of the Cordilleras - College",   // title shown on the Achievements card
+      years: "In progress",   // years shown under the title
       school: "University of the Cordilleras",
+      buildingPath: "assets/images/education/buildings/university-of-cordilleras.jpg",   // school building photo (shown inside the card)
       mark: "UC",
       logoPath: "assets/images/education/university-of-cordilleras-logo.png",
       program: "Bachelor of Science in Information Technology",
@@ -188,6 +200,41 @@ const portfolio = {
   }
 };
 
+/* ---------- CERTIFICATES (the moving carousel) ----------
+ * Put each file in assets/images/certificates/ and match the name below.
+ * title   = bold line shown when you click a certificate
+ * caption = the little description under it (leave "" for none)            */
+portfolio.certificates = [
+    { image: "assets/images/certificates/certificate-01.jpg", title: "Certificate 01", caption: "" },
+    { image: "assets/images/certificates/certificate-02.jpg", title: "Certificate 02", caption: "" },
+    { image: "assets/images/certificates/certificate-03.jpg", title: "Certificate 03", caption: "" },
+    { image: "assets/images/certificates/certificate-04.jpg", title: "Certificate 04", caption: "" },
+    { image: "assets/images/certificates/certificate-05.jpg", title: "Certificate 05", caption: "" },
+    { image: "assets/images/certificates/certificate-06.jpg", title: "Certificate 06", caption: "" },
+    { image: "assets/images/certificates/certificate-07.jpg", title: "Certificate 07", caption: "" },
+    { image: "assets/images/certificates/certificate-08.jpg", title: "Certificate 08", caption: "" },
+    { image: "assets/images/certificates/certificate-09.jpg", title: "Certificate 09", caption: "" },
+    { image: "assets/images/certificates/certificate-10.jpg", title: "Certificate 10", caption: "" },
+    { image: "assets/images/certificates/certificate-11.jpg", title: "Certificate 11", caption: "" },
+    { image: "assets/images/certificates/certificate-12.jpg", title: "Certificate 12", caption: "" },
+    { image: "assets/images/certificates/certificate-13.jpg", title: "Certificate 13", caption: "" },
+    { image: "assets/images/certificates/certificate-14.jpg", title: "Certificate 14", caption: "" },
+    { image: "assets/images/certificates/certificate-15.jpg", title: "Certificate 15", caption: "" },
+    { image: "assets/images/certificates/certificate-16.jpg", title: "Certificate 16", caption: "" },
+    { image: "assets/images/certificates/certificate-17.jpg", title: "Certificate 17", caption: "" },
+    { image: "assets/images/certificates/certificate-18.jpg", title: "Certificate 18", caption: "" },
+    { image: "assets/images/certificates/certificate-19.jpg", title: "Certificate 19", caption: "" },
+    { image: "assets/images/certificates/certificate-20.jpg", title: "Certificate 20", caption: "" },
+];
+
+/* ---------- DIPLOMAS & ACADEMIC MILESTONES (3 larger previews) ----------
+ * Put each file in assets/images/diplomas/ and match the name below.        */
+portfolio.diplomas = [
+  { image: "assets/images/diplomas/diploma-01.jpg", title: "Elementary Diploma", caption: "Apolinario Mabini Elementary School" },
+  { image: "assets/images/diplomas/diploma-02.jpg", title: "Junior High School Diploma", caption: "Baguio City High School" },
+  { image: "assets/images/diplomas/diploma-03.jpg", title: "Senior High School Diploma", caption: "Baguio City High School · STEM" }
+];
+
 /* ---------- ALL OTHER WEBSITE TEXT ---------- */
 portfolio.text = {
   siteTitle: "Rhaine Kylle Balabag — Portfolio",
@@ -195,6 +242,7 @@ portfolio.text = {
   brand: { initialA: "R", initialB: "B", word: "RHAINE" },
   nav: { home: "Home", about: "Personal Information", education: "Achievements", family: "Family & Friends" },
   cta: "Let's Connect",
+  pager: { prev: "Previous", next: "Next", label: "Page navigation" },
   home: {
     name: "Rhaine Kylle Balabag",
     hero: "*IT STUDENT* AND ASPIRING DEVELOPER",
@@ -216,6 +264,10 @@ portfolio.text = {
     eyebrow: "EDUCATION & ACHIEVEMENTS", title: "MY EDUCATIONAL *JOURNEY*",
     lede: "Choose a school to see its story and achievements.",
     back: "Back to Schools", achievementsTitle: "ACHIEVEMENTS AT THIS SCHOOL", logoCaption: "SCHOOL LOGO",
+    stagesTitle: "EDUCATIONAL *STAGES*", certificatesTitle: "*CERTIFICATES*", diplomasTitle: "DIPLOMAS & *ACADEMIC MILESTONES*",
+    sections: { academics: "Academic", competitions: "Competition", leadership: "Leadership" },
+    stageEmpty: "To be added.", buildingCaption: "SCHOOL BUILDING", openDetails: "View full details",
+    certificateHint: "Click to enlarge", imageSoon: "Image not added yet", prev: "Previous", next: "Next", close: "Close",
     viewAchievements: "View achievements", empty: "No achievements have been added for this school yet."
   },
   connections: { eyebrow: "THE PEOPLE WHO MAKE THE JOURNEY MEANINGFUL", title: "FAMILY *& FRIENDS*" },

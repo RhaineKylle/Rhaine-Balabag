@@ -458,37 +458,282 @@ function makeSchoolMark(school, imageId = null) {
   return wrapper;
 }
 
+/* =====================================================================
+ *  ACHIEVEMENTS PAGE
+ *  1) Educational stage cards   2) Certificates carousel   3) Diplomas
+ *  All text and image paths come from content.js (portfolio.schools,
+ *  portfolio.certificates, portfolio.diplomas, portfolio.text.education).
+ * ===================================================================== */
+
+/* Small helper: make an element with a class and optional text. */
+function makeEl(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+/* Which achievement groups appear on each school card, and their icons. */
+const STAGE_SECTIONS = [
+  { key: "academics", icon: "bx-award" },
+  { key: "competitions", icon: "bx-trophy" },
+  { key: "leadership", icon: "bx-group" }
+];
+/* Placeholder sentences such as "No awards added yet" are treated as empty. */
+const NOT_ADDED_YET = /^(no |this section is open|open for)/i;
+
+/* Collect the short list of achievements for one school + one category. */
+function stageItems(school, categoryKey) {
+  const level = portfolio.achievementCategories[categoryKey]?.levels?.[school.achievementKey];
+  const items = [];
+  (level?.groups || []).forEach((group) => {
+    if (/skills developed|proposed/i.test(group.heading)) return;   // keep the cards compact
+    group.items.forEach((item) => {
+      if (!NOT_ADDED_YET.test(item) && !items.includes(item)) items.push(item);
+    });
+  });
+  return items;
+}
+
+/* Build an image that stays hidden until it loads, so a missing file
+   simply leaves the placeholder visible instead of a broken icon. */
+function makeSoftImage(src, alt, className) {
+  const image = makeEl("img", className);
+  image.alt = alt;
+  image.hidden = true;
+  image.addEventListener("load", () => { image.hidden = false; image.parentElement?.classList.add("has-image"); });
+  image.addEventListener("error", () => { image.hidden = true; });
+  if (src) image.src = src;
+  return image;
+}
+
 function renderEducationCards() {
   const host = document.getElementById("school-grid");
   if (!host) return;
-  portfolio.schools.forEach((school, index) => {
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "school-card";
-    card.dataset.schoolIndex = String(index);
-    card.setAttribute("aria-label", `${school.level}: ${school.school}. Open details and achievements.`);
-    card.append(makeSchoolMark(school));
+  const t = portfolio.text.education;
 
-    const copy = document.createElement("span");
-    copy.className = "school-card-copy";
-    const level = document.createElement("span");
-    level.className = "school-card-level";
-    level.textContent = school.level;
-    const name = document.createElement("strong");
-    name.textContent = school.school;
-    const program = document.createElement("small");
-    program.textContent = school.program;
-    const open = document.createElement("span");
-    open.className = "school-card-open";
-    open.append(document.createTextNode(portfolio.text.education.viewAchievements + " "));
-    const arrow = document.createElement("i");
-    arrow.className = "bx bx-right-arrow-alt";
-    arrow.setAttribute("aria-hidden", "true");
-    open.append(arrow);
-    copy.append(level, name, program, open);
-    card.append(copy);
+  portfolio.schools.forEach((school, index) => {
+    const card = makeEl("article", "stage-card");
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.dataset.schoolIndex = String(index);        // the global click handler opens the school detail page
+    card.setAttribute("aria-label", `${school.level}: ${school.school}. ${t.openDetails}.`);
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openEducationDetail(index); }
+    });
+
+    /* Building photo (top of the card) */
+    const photo = makeEl("div", "stage-photo");
+    photo.append(makeEl("span", "stage-photo-label", t.buildingCaption));
+    photo.append(makeSoftImage(school.buildingPath, `${school.school} building`, "stage-photo-image"));
+
+    /* "View full details" pill sits on the photo's top-right corner */
+    photo.append(makeEl("span", "stage-open", `${t.openDetails} →`));
+
+    /* School logo + school name + years (the logo overlaps the photo's bottom edge) */
+    const head = makeEl("div", "stage-head");
+    const logo = makeEl("div", "stage-logo");
+    logo.append(makeSchoolMark(school));
+    const title = makeEl("div", "stage-title");
+    title.append(makeEl("h2", "stage-name", school.stageName || school.school));
+    if (school.years) title.append(makeEl("span", "stage-years", school.years));
+    head.append(logo, title);
+
+    const body = makeEl("div", "stage-body");
+
+    /* Academic / Competition / Leadership lists */
+    STAGE_SECTIONS.forEach(({ key, icon }) => {
+      const section = makeEl("section", "stage-section");
+      const title = makeEl("h3", "stage-section-title");
+      const iconEl = makeEl("i", `bx ${icon}`);
+      iconEl.setAttribute("aria-hidden", "true");
+      title.append(iconEl, document.createTextNode(` ${t.sections[key]}:`));
+      const list = makeEl("ul", "stage-list");
+      const items = stageItems(school, key);
+      if (items.length) items.forEach((text) => list.append(makeEl("li", "", text)));
+      else list.append(makeEl("li", "is-empty", t.stageEmpty));
+      section.append(title, list);
+      body.append(section);
+    });
+
+    card.append(photo, head, body);
     host.append(card);
   });
+
+  renderCertificates();
+  renderDiplomas();
+}
+
+/* ---------- CERTIFICATES CAROUSEL ---------- */
+let carouselFrame = 0;
+
+function renderCertificates() {
+  const track = document.getElementById("cert-track");
+  if (!track) return;
+  const list = portfolio.certificates || [];
+  if (!list.length) { track.closest(".cert-block")?.setAttribute("hidden", ""); return; }
+  const t = portfolio.text.education;
+
+  /* The list is drawn twice so the carousel can loop forever without a gap. */
+  [false, true].forEach((isCopy) => {
+    list.forEach((item, index) => {
+      const button = makeEl("button", "cert-item");
+      button.type = "button";
+      button.setAttribute("aria-label", `${item.title} — ${t.certificateHint}`);
+      if (isCopy) { button.tabIndex = -1; button.setAttribute("aria-hidden", "true"); }
+      const thumb = makeEl("span", "cert-thumb");
+      thumb.append(makeEl("span", "cert-placeholder", String(index + 1).padStart(2, "0")));
+      thumb.append(makeSoftImage(item.image, item.title, "cert-image"));
+      button.append(thumb);
+      button.addEventListener("click", () => openLightbox(list, index, button));
+      track.append(button);
+    });
+  });
+  startCarousel(track, list.length);
+}
+
+/* Moves the track a little every frame (auto-slide). The arrows add a
+   smooth push left or right. Hovering the carousel pauses it. */
+function startCarousel(track, count) {
+  cancelAnimationFrame(carouselFrame);
+  const viewport = track.parentElement;
+  const prev = document.getElementById("cert-prev");
+  const next = document.getElementById("cert-next");
+  const SPEED = 30;                       // pixels per second while auto-sliding
+  let x = 0, push = 0, paused = false, last = performance.now();
+
+  const itemWidth = () => track.children[1].offsetLeft - track.children[0].offsetLeft;
+  const loopWidth = () => track.children[count].offsetLeft - track.children[0].offsetLeft;
+
+  prev.onclick = () => { push -= itemWidth() * 3; };
+  next.onclick = () => { push += itemWidth() * 3; };
+  viewport.onmouseenter = () => { paused = true; };
+  viewport.onmouseleave = () => { paused = false; };
+  viewport.onfocusin = () => { paused = true; };
+  viewport.onfocusout = () => { paused = false; };
+
+  const frame = (now) => {
+    if (!track.isConnected) return;       // page changed: stop
+    const dt = Math.min(now - last, 64);
+    last = now;
+    if (Math.abs(push) > 0.5) {
+      const step = push * (1 - Math.exp(-dt / 140));
+      x += step; push -= step;
+    } else {
+      push = 0;
+      const lightboxOpen = document.body.classList.contains("lightbox-open");
+      if (!paused && !reducedMotion && !lightboxOpen) x += SPEED * dt / 1000;
+    }
+    const loop = loopWidth();
+    if (loop > 0) x = ((x % loop) + loop) % loop;       // wrap around
+    track.style.transform = `translate3d(${-x}px, 0, 0)`;
+    carouselFrame = requestAnimationFrame(frame);
+  };
+  carouselFrame = requestAnimationFrame(frame);
+}
+
+/* ---------- DIPLOMAS ---------- */
+function renderDiplomas() {
+  const grid = document.getElementById("dip-grid");
+  if (!grid) return;
+  const list = portfolio.diplomas || [];
+  if (!list.length) { grid.closest(".dip-block")?.setAttribute("hidden", ""); return; }
+  const t = portfolio.text.education;
+  list.forEach((item, index) => {
+    const card = makeEl("button", "dip-card");
+    card.type = "button";
+    card.setAttribute("aria-label", `${item.title} — ${t.certificateHint}`);
+    const thumb = makeEl("span", "dip-thumb");
+    thumb.append(makeEl("span", "cert-placeholder", String(index + 1).padStart(2, "0")));
+    thumb.append(makeSoftImage(item.image, item.title, "dip-image"));
+    const copy = makeEl("span", "dip-copy");
+    copy.append(makeEl("strong", "", item.title), makeEl("small", "", item.caption || ""), makeEl("em", "", t.certificateHint));
+    card.append(thumb, copy);
+    card.addEventListener("click", () => openLightbox(list, index, card));
+    grid.append(card);
+  });
+}
+
+/* ---------- LIGHTBOX (click a certificate or diploma to enlarge it) ---------- */
+const lightbox = { el: null, list: [], index: 0, opener: null };
+
+function buildLightbox() {
+  const t = portfolio.text.education;
+  const root = makeEl("div", "lightbox");
+  root.setAttribute("role", "dialog");
+  root.setAttribute("aria-modal", "true");
+  root.setAttribute("aria-label", "Enlarged image");
+
+  const close = makeEl("button", "lightbox-close", "×");
+  close.type = "button"; close.setAttribute("aria-label", t.close);
+  const prev = makeEl("button", "lightbox-nav lightbox-prev", "‹");
+  prev.type = "button"; prev.setAttribute("aria-label", t.prev);
+  const next = makeEl("button", "lightbox-nav lightbox-next", "›");
+  next.type = "button"; next.setAttribute("aria-label", t.next);
+
+  const figure = makeEl("figure", "lightbox-figure");
+  const stage = makeEl("div", "lightbox-stage");
+  const image = makeEl("img", "lightbox-image");
+  const missing = makeEl("div", "lightbox-missing", t.imageSoon);
+  stage.append(missing, image);
+  const caption = makeEl("figcaption", "lightbox-caption");
+  const title = makeEl("strong", "lightbox-title");
+  const text = makeEl("span", "lightbox-text");
+  const count = makeEl("small", "lightbox-count");
+  caption.append(title, text, count);
+  figure.append(stage, caption);
+  root.append(close, prev, figure, next);
+
+  Object.assign(lightbox, { el: root, image, missing, title, text, count, prev, next });
+  image.addEventListener("load", () => { image.hidden = false; missing.hidden = true; });
+  image.addEventListener("error", () => { image.hidden = true; missing.hidden = false; });
+
+  close.addEventListener("click", closeLightbox);
+  prev.addEventListener("click", () => showLightbox(lightbox.index - 1));
+  next.addEventListener("click", () => showLightbox(lightbox.index + 1));
+  root.addEventListener("click", (event) => { if (event.target === root || event.target === figure) closeLightbox(); });
+  document.addEventListener("keydown", (event) => {
+    if (!root.classList.contains("is-open")) return;
+    if (event.key === "Escape") closeLightbox();
+    else if (event.key === "ArrowLeft") showLightbox(lightbox.index - 1);
+    else if (event.key === "ArrowRight") showLightbox(lightbox.index + 1);
+  });
+  document.body.append(root);
+}
+
+function showLightbox(index) {
+  const total = lightbox.list.length;
+  lightbox.index = (index + total) % total;
+  const item = lightbox.list[lightbox.index];
+  lightbox.title.textContent = item.title || "";
+  lightbox.text.textContent = item.caption || "";
+  lightbox.text.hidden = !item.caption;
+  lightbox.count.textContent = `${lightbox.index + 1} / ${total}`;
+  lightbox.image.alt = item.title || "";
+  lightbox.image.hidden = true;
+  lightbox.missing.hidden = false;
+  lightbox.missing.textContent = `${item.title} · ${portfolio.text.education.imageSoon}`;
+  lightbox.image.removeAttribute("src");
+  if (item.image) lightbox.image.src = item.image;
+  const single = total < 2;
+  lightbox.prev.hidden = single; lightbox.next.hidden = single;
+}
+
+function openLightbox(list, index, opener) {
+  if (!lightbox.el) buildLightbox();
+  lightbox.list = list;
+  lightbox.opener = opener;
+  showLightbox(index);
+  lightbox.el.classList.add("is-open");
+  document.body.classList.add("lightbox-open");
+  lightbox.el.querySelector(".lightbox-close").focus();
+}
+
+function closeLightbox() {
+  if (!lightbox.el) return;
+  lightbox.el.classList.remove("is-open");
+  document.body.classList.remove("lightbox-open");
+  lightbox.opener?.focus({ preventScroll: true });
 }
 
 function renderEducationDetail(schoolIndex) {
@@ -607,8 +852,32 @@ function createAchievementGroup(group) {
   return section;
 }
 
+/* ---------- PREVIOUS / NEXT BAR ---------- */
+const PAGE_ORDER = ["home", "about", "education", "family-friends"];          // order of the tabs
+const PAGE_NAME_KEY = { home: "home", about: "about", education: "education", "family-friends": "family" };   // labels in content.js > text.nav
+
+function setPagerButton(button, view) {
+  const name = button.querySelector(".pager-name");
+  button.disabled = !view;                       // first / last tab: that button is switched off
+  if (view) { button.dataset.view = view; name.textContent = portfolio.text.nav[PAGE_NAME_KEY[view]]; }
+  else { button.removeAttribute("data-view"); name.textContent = ""; }
+}
+
+function updatePager(activeView) {
+  const position = PAGE_ORDER.indexOf(activeView);
+  const t = portfolio.text.pager;
+  const prev = document.getElementById("pager-prev"), next = document.getElementById("pager-next");
+  if (!prev || !next || position < 0) return;
+  prev.querySelector(".pager-dir").textContent = t.prev;
+  next.querySelector(".pager-dir").textContent = t.next;
+  setPagerButton(prev, PAGE_ORDER[position - 1]);
+  setPagerButton(next, PAGE_ORDER[position + 1]);
+  document.querySelectorAll(".pager-dot").forEach((dot) => dot.classList.toggle("is-active", dot.dataset.view === activeView));
+}
+
 function markActiveView(view) {
   const activeView = view === "education-detail" ? "education" : view;
+  updatePager(activeView);
   navButtons.forEach((button) => {
     const isActive = button.dataset.view === activeView;
     button.classList.toggle("is-active", isActive);
@@ -623,7 +892,7 @@ function fitView() {
   if (!panel) return;
   const W = window.innerWidth, home = panel.classList.contains("home-view");
   const hi = home ? 1 : W >= 1800 ? 1.5 : W >= 1500 ? 1.3 : W >= 1200 ? 1.15 : W >= 820 ? 1.05 : 1.8;
-  const clippers = [panel, ...panel.querySelectorAll("*")].filter((n) => n === panel || n.matches(".about-reference-layout, .school-card, .school-card-copy, .connection-panel, .fact-card, .about-fact, .about-topic, .about-tag-list li") || (getComputedStyle(n).overflow !== "visible" && !n.closest(".instrument-dial")));
+  const clippers = [panel, ...panel.querySelectorAll("*")].filter((n) => n === panel || n.matches(".about-reference-layout, .school-card, .stage-card, .school-card-copy, .connection-panel, .fact-card, .about-fact, .about-topic, .about-tag-list li") || (getComputedStyle(n).overflow !== "visible" && !n.closest(".instrument-dial, .cert-viewport")));
   const stack = home ? panel.querySelector(".home-center-stack") : null;
   const inside = () => { if (!stack) return true; const r = stack.getBoundingClientRect(), pr = panel.getBoundingClientRect(); return r.top >= pr.top - 2 && r.bottom <= pr.bottom + 2; };
   const fits = () => inside() && clippers.every((n) => (n.clientWidth === 0 && n.clientHeight === 0) || (n.scrollHeight <= n.clientHeight + (n.matches(".about-reference-layout") ? 0 : 8) && n.scrollWidth <= n.clientWidth + 8));
