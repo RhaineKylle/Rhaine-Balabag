@@ -742,16 +742,10 @@ function renderEducationCards() {
     const dipAt = DIP_INDEX[school.achievementKey];
     const dip = dipAt !== undefined ? dipList[dipAt] : null;
     const photo = makeEl("div", "stage-photo stage-dip");
-    if (dip) {
+    if (dip) {                                        /* display only: not clickable */
       photo.append(makeEl("span", "stage-photo-label", "DIPLOMA"));
       photo.append(makeSoftImage(dip.image, dip.title, "stage-dip-image"));
-      photo.append(makeEl("span", "stage-dip-tag", "Diploma · click to enlarge"));
-      photo.setAttribute("role", "button");
-      photo.tabIndex = 0;
-      photo.setAttribute("aria-label", `${dip.title}: click to enlarge`);
-      const openDip = (event) => { event.stopPropagation(); event.preventDefault(); openLightbox(dipList, dipAt, photo); };
-      photo.addEventListener("click", openDip);
-      photo.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") openDip(event); });
+      photo.append(makeEl("span", "stage-dip-tag", "Diploma"));
     } else {
       photo.classList.add("is-empty");
       photo.append(makeEl("span", "stage-photo-label", "DIPLOMA · IN PROGRESS"));
@@ -790,7 +784,8 @@ function renderEducationCards() {
       body.append(section);
     });
 
-    card.append(photo, head, body);
+    const hasAny = STAGE_SECTIONS.some(({ key }) => stageItems(school, key).length);
+    if (hasAny) card.append(photo, head, body); else { card.classList.add("stage-compact"); card.append(photo, head); }   /* nothing added yet: just the school name */
     if (school.achievementKey === "college" && kgCard) {     // 4th column: College + Kindergarten share it
       const split = makeEl("div", "stage-split");
       card.classList.add("stage-college");

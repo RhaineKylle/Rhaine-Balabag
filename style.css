@@ -3022,3 +3022,56 @@ body[data-view="education"] .screen-stage {
 .cert-cap { display: -webkit-box; width: clamp(190px, 17vw, 300px); overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   color: #c9d1d6; font: 600 clamp(10.5px, .8vw, 12.5px)/1.3 var(--font-body); text-align: center; text-shadow: 0 1px 2px #000; }
 .cert-thumb { height: clamp(112px, 16.5vh, 185px); }
+
+/* ===== Achievements v6 (Rhaine's request): bigger text, bigger graduation photos, bigger certificates;
+   diplomas a little shorter to make room, and not clickable ===== */
+.stage-dip { cursor: default; aspect-ratio: 16 / 7.4; }
+.stage-dip:hover, .stage-dip:focus-visible { border-color: rgba(255, 255, 255, .14); box-shadow: none; }
+.stage-dip:hover .stage-dip-image { transform: none; }
+.stage-dip-image { object-position: center 45%; }
+.stage-name { font-size: 23px; }
+.stage-years { font-size: 15px; }
+.stage-section-title { font-size: 17.5px; }
+.stage-section-title i { font-size: 19px; }
+.stage-list { font-size: 15.5px; line-height: 1.3; }
+.stage-body { gap: 5px; padding: 8px 14px 10px; }
+.stage-card .stage-grad { width: clamp(100px, 8.6vw, 150px); flex: 0 0 clamp(100px, 8.6vw, 150px); }
+.stage-split .stage-grad { width: clamp(80px, 6.6vw, 118px); flex: 0 0 clamp(80px, 6.6vw, 118px); }
+.stage-split .stage-name { font-size: 20px; }
+.stage-split .stage-section-title { font-size: 16px; }
+.stage-split .stage-list { font-size: 14px; }
+.cert-thumb { width: clamp(230px, 20vw, 360px); height: clamp(150px, 21vh, 240px); }
+.cert-cap { width: clamp(230px, 20vw, 360px); font-size: clamp(12px, .95vw, 14.5px); }
+/* v7: larger text again (diplomas a bit shorter to make room) */
+.stage-dip { aspect-ratio: 16 / 6.2; }
+.stage-name { font-size: 26px; }
+.stage-years { font-size: 16.5px; }
+.stage-section-title { font-size: 20px; }
+.stage-section-title i { font-size: 21px; }
+.stage-list { font-size: 18px; line-height: 1.26; padding-left: 20px; }
+.stage-list li { margin: 0 0 1px; }
+.stage-body { gap: 4px; padding: 6px 12px 8px; }
+.stage-card .stage-head { margin-top: 8px; }
+.stage-split .stage-name { font-size: 21px; }
+.stage-split .stage-section-title { font-size: 18px; }
+.stage-split .stage-list { font-size: 16px; }
+.cert-cap { font-size: clamp(13px, 1.05vw, 16px); }
+
+/* v8: College card shows only its name (nothing added yet), Kindergarten takes the rest of the column; same font sizes everywhere */
+.stage-split { grid-template-rows: auto minmax(0, 1fr); }
+.stage-card.stage-compact { padding-bottom: 12px; }
+.stage-split .stage-name, .stage-kinder .stage-name { font-size: 26px; }
+.stage-split .stage-years, .stage-kinder .stage-years { font-size: 16.5px; }
+.stage-split .stage-section-title { font-size: 20px; }
+.stage-split .stage-section-title i { font-size: 21px; }
+.stage-split .stage-list { font-size: 18px; }
+.stage-split .stage-logo, .stage-kinder .stage-logo { width: 54px; flex: 0 0 54px; }
+.stage-split .stage-logo .school-mark-wrap { width: 54px; height: 54px; }
+.stage-split .stage-grad { width: clamp(100px, 8.6vw, 150px); flex: 0 0 clamp(100px, 8.6vw, 150px); }
+.stage-level { font-size: 13px; }
+.stage-kinder.has-bg { background-position: center; }
+.stage-kinder.has-bg { background: linear-gradient(180deg, rgba(10, 13, 15, .55) 0%, rgba(10, 13, 15, .8) 35%, rgba(10, 13, 15, .9) 100%), var(--stage-bg) center top / cover no-repeat, #0b0e10; }
+/* v9: the 4th column is split in equal halves: College on top, Kindergarten below */
+.stage-split { grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); }
+.stage-card.stage-compact { justify-content: flex-start; }
+.stage-card.stage-compact.has-bg { background: linear-gradient(180deg, rgba(10, 13, 15, .72) 0%, rgba(10, 13, 15, .35) 45%, rgba(10, 13, 15, .55) 100%), var(--stage-bg) center / cover no-repeat, #0b0e10; }
