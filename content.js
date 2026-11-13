@@ -165,6 +165,18 @@ const portfolio = {
   }
 };
 
+/* ---------- KINDERGARTEN (small first card on the Achievements page) ---------- */
+portfolio.kindergarten = {
+  level: "Kindergarten",
+  school: "Poliwes Community Church Learning Center",
+  years: "2012-2014",
+  mark: "PC",            // initials shown until a logo is added (logoPath)
+  logoPath: "",
+  buildingPath: "assets/images/education/buildings/poliwes-learning-center.jpg",   // card background (recognition day banner)
+  gradPhotoPath: "assets/images/education/graduation/kindergarten.jpg",           // graduation photo (left side)
+  academics: ["Best in Reading.", "Best in Math.", "2nd Place."]
+};
+
 /* ---------- CERTIFICATES (the moving carousel) ----------
  * Put each file in assets/images/certificates/ and match the name below.
  * title   = bold line shown when you click a certificate

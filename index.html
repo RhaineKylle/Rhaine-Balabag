@@ -18,29 +18,31 @@
 </head>
 <body>
   <div class="loader" id="loader" role="status" aria-live="polite">
-    <canvas id="loader-canvas" aria-hidden="true"></canvas>
+    <div class="loader-world" id="loader-world"><canvas id="loader-canvas" aria-hidden="true"></canvas></div>
     <div class="loader-vignette" aria-hidden="true"></div>
     <p class="loader-brand"><span data-t="loader.title">RHAINE</span><b>.</b></p>
-    <div class="loader-cluster" aria-hidden="true">
-      <svg viewBox="0 0 320 320">
-        <defs>
-          <linearGradient id="ld-bezel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3f6f8"/><stop offset=".22" stop-color="#868f97"/><stop offset=".5" stop-color="#23282d"/><stop offset=".76" stop-color="#a3acb4"/><stop offset="1" stop-color="#15181b"/></linearGradient>
-          <radialGradient id="ld-face" cx=".5" cy=".38" r=".72"><stop offset="0" stop-color="#20262b"/><stop offset=".65" stop-color="#0b0d0f"/><stop offset="1" stop-color="#040506"/></radialGradient>
-          <radialGradient id="ld-hub" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#f1f4f6"/><stop offset=".5" stop-color="#6d767e"/><stop offset="1" stop-color="#14171a"/></radialGradient>
-          <linearGradient id="ld-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset=".55" stop-color="#fff" stop-opacity=".02"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-        </defs>
-        <circle cx="160" cy="160" r="157" fill="url(#ld-bezel)"/>
-        <circle cx="160" cy="160" r="149" fill="#050607"/>
-        <circle cx="160" cy="160" r="144" fill="url(#ld-face)"/>
-        <g class="dial-marks"></g>
-        <text id="loader-speed" class="dial-speed" x="160" y="226">0</text>
-        <text class="dial-unit" x="160" y="246">KM/H</text>
-        <g id="loader-needle" class="ld-needle" transform="rotate(-135 160 160)"><polygon points="160,34 164.5,164 155.5,164" fill="#ff4a2e"/><polygon points="157,160 163,160 162,200 158,200" fill="#d9381f"/><line x1="160" y1="40" x2="160" y2="160" stroke="#ffd0c4" stroke-opacity=".55" stroke-width=".8"/></g>
-        <circle cx="160" cy="160" r="14" fill="url(#ld-hub)"/><circle cx="160" cy="160" r="4" fill="#0b0d0f"/>
-        <ellipse cx="160" cy="92" rx="122" ry="80" fill="url(#ld-glass)"/>
-      </svg>
+    <div class="loader-dash" id="loader-dash" aria-hidden="true">
+      <div class="ld-gauge ld-tach" id="ld-tach"></div>
+      <div class="ld-center">
+        <div class="ld-shift"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="ld-gearbox"><small>GEAR</small><b id="ld-gear">N</b></div>
+        <div class="ld-lamps">
+          <span class="ld-lamp amber" title="Engine"><svg viewBox="0 0 24 24"><path d="M4 10h2V8h4V6h4v2h3l2 3h2v5h-2l-2 3H9l-2-2H4z"/></svg></span>
+          <span class="ld-lamp red" title="Battery"><svg viewBox="0 0 24 24"><path d="M3 7h18v12H3zM6 4h3v3H6zm9 0h3v3h-3zM6 12h4v1H6zm8 0h4v1h-4zm1.5-1.5h1v4h-1z"/></svg></span>
+          <span class="ld-lamp red" title="Oil"><svg viewBox="0 0 24 24"><path d="M3 11h7l2-2h4l5 3-6 6H5l-2-3zm16-6c1 2 2 3 2 4a2 2 0 0 1-4 0c0-1 1-2 2-4z"/></svg></span>
+          <span class="ld-lamp red" title="Seat belt"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.5"/><path d="M8 9h8l1 7h-3v5h-4v-5H7zM9 9l7 9-1 1-7-9z"/></svg></span>
+          <span class="ld-lamp amber" title="ABS"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/><text x="12" y="15" text-anchor="middle" font-size="6.5" font-weight="700" font-family="Arial">ABS</text></svg></span>
+        </div>
+        <div class="ld-odo"><span id="ld-odo">128440</span><small>KM</small></div>
+      </div>
+      <div class="ld-gauge ld-speedo" id="ld-speedo"></div>
     </div>
-    <div class="loader-foot"><span id="loader-status">WARMING UP THE ENGINE…</span><b id="loader-percent">0%</b><div class="loader-bar"><i id="loader-fill"></i></div></div>
+    <div class="loader-foot"><span id="loader-status">SYSTEM CHECK…</span><b id="loader-percent">0%</b><div class="loader-bar"><i id="loader-fill"></i></div></div>
+  </div>
+  <div class="page-shift" id="page-shift" aria-hidden="true">
+    <div class="ps-panel"><div class="ps-streaks"></div><div class="ps-edge"></div>
+      <div class="ps-label"><span class="ps-mark"><b>R</b><b>B</b></span><span class="ps-title" id="ps-title"></span><span class="ps-line"><i></i></span></div>
+    </div>
   </div>
   <div class="page-wipe" id="page-wipe" aria-hidden="true"></div>
   <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
@@ -179,31 +181,23 @@
   </template>
 
   <template id="view-education">
-    <!-- ACHIEVEMENTS PAGE: 1) Educational stages  2) Certificates carousel  3) Diplomas.
+    <!-- ACHIEVEMENTS PAGE: 1) Educational stages (building = card background, diploma on top)  2) Certificates strip.
          The cards, certificates and diplomas are filled in by script.js from content.js. -->
     <section class="view-panel inner-view achievements-page" aria-labelledby="education-title">
-      <header class="ach-heading">
-        <h1 id="education-title" data-t="education.stagesTitle" data-accent="ach-accent">EDUCATIONAL <span class="ach-accent">STAGES</span></h1>
-      </header>
 
-      <!-- 1. Four school cards in one row -->
-      <div class="stage-grid" id="school-grid" aria-label="Educational stages"></div>
 
-      <!-- 2. Certificates carousel (arrows on both sides) -->
+      <!-- 1. Certificates (on top): a strip that moves on its own, stops while the cursor is on it -->
       <section class="ach-block cert-block" aria-labelledby="cert-title">
         <h2 class="ach-subheading" id="cert-title" data-t="education.certificatesTitle" data-accent="ach-accent"><span class="ach-accent">CERTIFICATES</span></h2>
         <div class="cert-carousel" id="cert-carousel">
-          <button class="cert-arrow" id="cert-prev" type="button" aria-label="Previous certificates"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
           <div class="cert-viewport"><div class="cert-track" id="cert-track"></div></div>
-          <button class="cert-arrow" id="cert-next" type="button" aria-label="Next certificates"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </section>
-
-      <!-- 3. Three larger diploma previews -->
-      <section class="ach-block dip-block" aria-labelledby="dip-title">
-        <h2 class="ach-subheading" id="dip-title" data-t="education.diplomasTitle" data-accent="ach-accent">DIPLOMAS &amp; <span class="ach-accent">ACADEMIC MILESTONES</span></h2>
-        <div class="dip-grid" id="dip-grid"></div>
-      </section>
+      <header class="ach-heading">
+        <h1 id="education-title" data-t="education.stagesTitle" data-accent="ach-accent">EDUCATIONAL <span class="ach-accent">STAGES</span></h1>
+      </header>
+      <!-- 2. Four school cards in one row -->
+      <div class="stage-grid" id="school-grid" aria-label="Educational stages"></div>
     </section>
   </template>
 
