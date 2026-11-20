@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>if(location.protocol==="http:"&&!/^(localhost|127\.)/.test(location.hostname))location.replace("https://"+location.host+location.pathname+location.search+location.hash);</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="The digital portfolio of Rhaine Kylle Balabag, an IT student from Baguio City, Philippines.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Rhaine Kylle Balabag — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<!--
+  ====================================================================
+   HOW TO EDIT THIS WEBSITE
+   Every word on the site is written in this file. Search (Ctrl+F) for
+   the text you want to change and edit it. Don't touch the tags
+   (<span class="...">), only the words between them.
+
+   PAGE MAP (search for these banners):
+     LOADING SCREEN ... the car start-up animation
+     HEADER / NAV ..... menu buttons
+     HOME PAGE ........ name, tagline, social links, CV button
+     PERSONAL INFO .... about me, hobbies, skills, statement
+     ACHIEVEMENTS ..... certificates + school cards
+     FAMILY & FRIENDS . photo slots
+
+   PICTURES: put the file inside the assets/ folder, then change the
+   src="..." path. Keep the data-soft word inside every <img>.
+  ====================================================================
+-->
+<body>
+
+  <!-- ================= LOADING SCREEN ================= -->
+  <div class="loader" id="loader" role="status" aria-live="polite">
+    <div class="loader-world" id="loader-world"><canvas id="loader-canvas" aria-hidden="true"></canvas></div>
+    <div class="loader-vignette" aria-hidden="true"></div>
+    <p class="loader-brand"><span>RHAINE</span><b>.</b></p>
+    <div class="loader-dash" id="loader-dash" aria-hidden="true">
+      <div class="ld-gauge ld-tach" id="ld-tach"></div>
+      <div class="ld-center">
+        <div class="ld-shift"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="ld-gearbox"><small>GEAR</small><b id="ld-gear">N</b></div>
+        <div class="ld-lamps">
+          <span class="ld-lamp amber" title="Engine"><svg viewBox="0 0 24 24"><path d="M4 10h2V8h4V6h4v2h3l2 3h2v5h-2l-2 3H9l-2-2H4z"/></svg></span>
+          <span class="ld-lamp red" title="Battery"><svg viewBox="0 0 24 24"><path d="M3 7h18v12H3zM6 4h3v3H6zm9 0h3v3h-3zM6 12h4v1H6zm8 0h4v1h-4zm1.5-1.5h1v4h-1z"/></svg></span>
+          <span class="ld-lamp red" title="Oil"><svg viewBox="0 0 24 24"><path d="M3 11h7l2-2h4l5 3-6 6H5l-2-3zm16-6c1 2 2 3 2 4a2 2 0 0 1-4 0c0-1 1-2 2-4z"/></svg></span>
+          <span class="ld-lamp red" title="Seat belt"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.5"/><path d="M8 9h8l1 7h-3v5h-4v-5H7zM9 9l7 9-1 1-7-9z"/></svg></span>
+          <span class="ld-lamp amber" title="ABS"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/><text x="12" y="15" text-anchor="middle" font-size="6.5" font-weight="700" font-family="Arial">ABS</text></svg></span>
+        </div>
+        <div class="ld-odo"><span id="ld-odo">128440</span><small>KM</small></div>
+      </div>
+      <div class="ld-gauge ld-speedo" id="ld-speedo"></div>
+    </div>
+    <!-- The words under the loading bar, in order, separated by | -->
+    <div class="loader-foot"><span id="loader-status" data-messages="WARMING UP THE ENGINE|SHIFTING GEARS|HITTING TOP SPEED|READY TO LAUNCH">SYSTEM CHECK…</span><b id="loader-percent">0%</b><div class="loader-bar"><i id="loader-fill"></i></div></div>
+  </div>
+  <div class="page-shift" id="page-shift" aria-hidden="true">
+    <div class="ps-panel"><div class="ps-streaks"></div><div class="ps-edge"></div>
+      <div class="ps-label"><span class="ps-mark"><b>R</b><b>B</b></span><span class="ps-title" id="ps-title"></span><span class="ps-line"><i></i></span></div>
+    </div>
+  </div>
+  <div class="page-wipe" id="page-wipe" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+  <div class="portfolio-shell">
+    <canvas class="bg-canvas" id="bg-canvas" aria-hidden="true"></canvas>
+
+    <!-- ================= HEADER / NAV ================= -->
+    <header class="site-header">
+      <button class="brand" type="button" data-view="home" aria-label="Rhaine — go to Home">
+        <span class="brand-symbol" aria-hidden="true"><span>R</span><span>B</span></span>
+        <span class="brand-word"><span>RHAINE</span><span class="brand-period">.</span></span>
+      </button>
+
+      <!-- The order of these 4 buttons is also the order of the Previous / Next bar at the bottom. -->
+      <nav class="primary-nav" aria-label="Main navigation">
+        <button class="nav-button is-active" type="button" data-view="home" aria-current="page">Home</button>
+        <button class="nav-button" type="button" data-view="about">Personal Information</button>
+        <button class="nav-button" type="button" data-view="education">Achievements</button>
+        <button class="nav-button" type="button" data-view="family-friends">Family &amp; Friends</button>
+      </nav>
+
+      <button class="button button-primary header-cta" type="button" data-view="about">
+        <span>Let's Connect</span><i class="bx bx-arrow-up-right" aria-hidden="true"></i>
+      </button>
+    </header>
+
+    <main class="screen-stage">
+      <div class="content-region" id="content-region" aria-live="polite" aria-atomic="true"></div>
+    </main>
+
+    <!-- PREVIOUS / NEXT bar (the page names between the arrows are filled in automatically from the menu above) -->
+    <nav class="page-pager" id="page-pager" aria-label="Page navigation">
+      <button class="pager-btn pager-prev" id="pager-prev" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        <span class="pager-text"><small class="pager-dir">Previous</small><strong class="pager-name"></strong></span>
+      </button>
+      <span class="pager-dots" id="pager-dots">
+        <button class="pager-dot" type="button" data-view="home" aria-label="Home"></button>
+        <button class="pager-dot" type="button" data-view="about" aria-label="Personal Information"></button>
+        <button class="pager-dot" type="button" data-view="education" aria-label="Achievements"></button>
+        <button class="pager-dot" type="button" data-view="family-friends" aria-label="Family &amp; Friends"></button>
+      </span>
+      <button class="pager-btn pager-next" id="pager-next" type="button">
+        <span class="pager-text"><small class="pager-dir">Next</small><strong class="pager-name"></strong></span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </nav>
+    <span class="screen-grain" aria-hidden="true"></span>
+  </div>
+
+
+  <!-- ============================================================
+       HOME PAGE
+       ============================================================ -->
+  <template id="view-home">
+    <section class="view-panel home-view" aria-labelledby="home-title">
+      <div class="gauge-cluster gauge-left" aria-hidden="true">
+        <div class="instrument-dial gauge-primary">
+          <span class="dial-label dial-label-low">10</span><span class="dial-label dial-label-high">100</span>
+          <span class="dial-needle"></span><span class="dial-hub"></span>
+        </div>
+      </div>
+
+      <div class="home-center-stack">
+        <div class="portrait-stage">
+          <div class="portrait-orbit" aria-hidden="true"></div>
+          <div class="portrait-frame">
+            <img class="portrait-image" id="portrait-image" data-soft src="assets/images/home/portrait.jpg" alt="Portrait of Rhaine Kylle Balabag">
+          </div>
+        </div>
+
+        <div class="home-copy">
+          <!-- The name below is typed out letter by letter. Keep the aria-label the same as the name. -->
+          <h1 class="home-name" id="home-title" aria-label="Rhaine Kylle Balabag"><span class="typed-output" aria-hidden="true">Rhaine Kylle Balabag</span><span class="typing-caret" aria-hidden="true"></span></h1>
+          <p class="hero-heading"><span class="role-accent">IT STUDENT</span> AND ASPIRING DEVELOPER</p>
+
+          <!-- SOCIAL LINKS: paste your link inside data-url="" and that icon turns on. Leave it empty to keep it greyed out. -->
+          <div class="home-socials" id="home-socials" aria-label="Social profiles">
+            <button class="social-control" type="button" disabled data-url="" data-name="Facebook" title="Add your Facebook link in index.html (data-url)" aria-label="Facebook link not added yet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 22v-8.2h2.8l.5-3.4h-3.3V8.3c0-1 .4-1.7 1.8-1.7H17V3.5c-.3 0-1.3-.2-2.4-.2-2.5 0-4.2 1.5-4.2 4.3v2.8H7.6v3.4h2.8V22z"/></svg></button>
+            <button class="social-control" type="button" disabled data-url="" data-name="GitHub" title="Add your GitHub link in index.html (data-url)" aria-label="GitHub link not added yet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.700-.3-5.500-1.300-5.500-5.900 0-1.300.5-2.400 1.200-3.200-.1-.3-.5-1.500.1-3.200 0 0 1-.3 3.300 1.200a11.500 11.500 0 0 1 6 0C17.300 4.700 18.300 5 18.300 5c.7 1.700.2 2.900.1 3.200.8.800 1.200 1.900 1.200 3.200 0 4.600-2.800 5.600-5.500 5.900.4.400.8 1.100.8 2.200v3.300c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg></button>
+            <button class="social-control" type="button" disabled data-url="" data-name="LinkedIn" title="Add your LinkedIn link in index.html (data-url)" aria-label="LinkedIn link not added yet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.500a2.500 2.500 0 1 1 0 5 2.500 2.500 0 0 1 0-5zM3 9.800h4V21H3zM9.500 9.800h3.800v1.600c.6-1 1.900-1.900 3.900-1.900 4.100 0 4.800 2.700 4.800 6.200V21h-4v-4.900c0-1.200 0-2.700-1.700-2.700s-1.900 1.300-1.900 2.600V21h-4z"/></svg></button>
+          </div>
+
+          <div class="hero-actions">
+            <button class="button button-primary" type="button" data-view="education"><span>Explore My Work</span><i class="bx bx-right-arrow-alt" aria-hidden="true"></i></button>
+            <!-- CV BUTTON: put the path of your CV file in data-url (example: data-url="assets/cv.pdf") to turn it on. -->
+            <button class="button button-secondary" id="cv-button" type="button" disabled data-url="" title="Add your CV file path in index.html (data-url) to enable downloads."><i class="bx bx-download" aria-hidden="true"></i><span>Download CV</span></button>
+          </div>
+
+          <div class="quick-facts" aria-label="Explore more">
+            <button class="fact-card" type="button" data-view="education"><span class="fact-icon"><i class="bx bx-book-open" aria-hidden="true"></i></span><span><strong>IT Student</strong><small>Building my foundation</small></span></button>
+            <button class="fact-card" type="button" data-view="education"><span class="fact-icon"><i class="bx bx-code-alt" aria-hidden="true"></i></span><span><strong>Web Development</strong><small>Learning by creating</small></span></button>
+            <button class="fact-card" type="button" data-view="about"><span class="fact-icon"><i class="bx bx-refresh" aria-hidden="true"></i></span><span><strong>Continuous Learning</strong><small>One step at a time</small></span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="gauge-cluster gauge-right" aria-hidden="true">
+        <div class="instrument-dial gauge-primary">
+          <span class="dial-label dial-label-low">10</span><span class="dial-label dial-label-high">100</span>
+          <span class="dial-needle"></span><span class="dial-hub"></span>
+        </div>
+      </div>
+    </section>
+  </template>
+
+
+  <!-- ============================================================
+       PERSONAL INFORMATION PAGE
+       ============================================================ -->
+  <template id="view-about">
+    <section class="view-panel inner-view profile-page about-page" aria-labelledby="about-title">
+      <div class="about-layout about-reference-layout about-profile-layout">
+        <figure class="about-photo-frame">
+          <img class="about-profile-photo" data-soft src="assets/images/about/picture-1.jpg" alt="Rhaine Kylle Balabag in graduation attire with medals" loading="eager" decoding="async">
+        </figure>
+        <article class="about-copy about-profile-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> <span>ABOUT ME / PROFILE</span></p>
+          <header class="about-profile-heading">
+            <!-- The last word (in the accent colour) is the one inside about-name-accent -->
+            <h1 id="about-title"><span>Rhaine Kylle</span> <span class="about-name-accent">Balabag</span></h1>
+            <p class="about-profile-role"><span class="about-live-dot" aria-hidden="true"></span><span>First Year · Network Security</span></p>
+          </header>
+          <div class="about-profile-content">
+            <dl class="about-facts" aria-label="Personal details">
+              <div class="about-fact"><dt>Birthday</dt><dd>November 26, 2007</dd></div>
+              <!-- AGE updates itself every year from data-birthdate (year-month-day). The number is replaced automatically. -->
+              <div class="about-fact"><dt>Age</dt><dd data-birthdate="2007-11-26">18 years old</dd></div>
+              <div class="about-fact"><dt>Sex</dt><dd>Male</dd></div>
+              <div class="about-fact"><dt>Status</dt><dd>Single</dd></div>
+              <div class="about-fact"><dt>Height</dt><dd>5'5"</dd></div>
+              <div class="about-fact"><dt>Weight</dt><dd>53 kg</dd></div>
+              <div class="about-fact"><dt>Location</dt><dd>Poblacion Tuba, Benguet, Philippines</dd></div>
+            </dl>
+            <section class="about-education-strip" aria-label="Education">
+              <div class="about-education-caption"><span class="about-section-label">EDUCATION</span><span class="about-year-badge">First Year</span></div>
+              <strong class="about-college-name">University of the Cordilleras</strong>
+              <p class="about-course-row"><span>COURSE</span><span>Bachelor of Science in Information Technology - Network Security</span></p>
+            </section>
+            <div class="about-topic-grid">
+              <section class="about-topic" aria-labelledby="about-hobbies-title">
+                <h2 id="about-hobbies-title">HOBBIES</h2>
+                <ul class="about-tag-list">
+                  <li>Performing</li>
+                  <li>Digital design</li>
+                  <li>Learning new things</li>
+                </ul>
+              </section>
+              <section class="about-topic" aria-labelledby="about-interests-title">
+                <h2 id="about-interests-title">INTERESTS</h2>
+                <ul class="about-tag-list">
+                  <li>Programming</li>
+                  <li>Mathematics</li>
+                  <li>Research</li>
+                  <li>Creativity</li>
+                  <li>Everyday technology</li>
+                </ul>
+              </section>
+              <section class="about-topic" aria-labelledby="about-skills-title">
+                <h2 id="about-skills-title">SKILLS</h2>
+                <ul class="about-tag-list">
+                  <li>Analytical thinking</li>
+                  <li>Problem-solving</li>
+                  <li>Communication</li>
+                  <li>Creativity</li>
+                </ul>
+              </section>
+              <section class="about-topic" aria-labelledby="about-technical-title">
+                <h2 id="about-technical-title">TECHNICAL SKILLS</h2>
+                <ul class="about-tag-list">
+                  <li>Basic programming</li>
+                  <li>Computer applications</li>
+                  <li>Digital design</li>
+                </ul>
+              </section>
+            </div>
+            <section class="about-statement" aria-label="Personal statement">
+              <span class="about-section-label">PERSONAL STATEMENT</span>
+              <p>I am a curious, creative, and goal-oriented individual who enjoys exploring new ideas and taking on challenges. I value continuous learning and believe that every experience is an opportunity to improve myself. As I continue my journey in Information Technology, I hope to strengthen my technical abilities, gain practical experience, and develop solutions that combine creativity and functionality. I am always willing to learn, adapt, collaborate, and contribute my ideas to every opportunity that comes my way.</p>
+            </section>
+          </div>
+        </article>
+      </div>
+    </section>
+  </template>
+
+
+  <!-- ============================================================
+       ACHIEVEMENTS PAGE
+       1) Certificates (they slide on their own; the slider pauses while the mouse is on it)
+       2) Educational stages (4 columns: Elementary, Junior High, Senior High, College + Kindergarten)
+
+       To ADD a certificate: copy one whole <div class="cert-item"> ... </div> line, paste it at the end of the list,
+       and change the number in the file name, the alt text and the title. Numbers (01, 02...) and the endless loop are automatic.
+       To ADD an achievement: copy one <li>...</li> line inside the school card.
+       ============================================================ -->
+  <template id="view-education">
+    <section class="view-panel inner-view achievements-page" aria-labelledby="education-title">
+
+      <section class="ach-block cert-block" aria-labelledby="cert-title">
+        <h2 class="ach-subheading" id="cert-title" data-accent="ach-accent"><span class="ach-accent">CERTIFICATES</span></h2>
+        <div class="cert-carousel" id="cert-carousel">
+          <div class="cert-viewport"><div class="cert-track" id="cert-track">
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-01.jpg" alt="English Festival — Tongue Twister (2nd Place) — Grade 2 · Apolinario Mabini Elementary School · Nov 2015"></span><span class="cert-cap">English Festival — Tongue Twister (2nd Place)</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-02.jpg" alt="Academic Excellence Award — Grade 3 — With High Honors · 2nd Quarter, SY 2016-2017"></span><span class="cert-cap">Academic Excellence Award — Grade 3</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-03.jpg" alt="Metrobank-MTAP-DepEd Math Challenge — Certificate of Participation · Division Finals, March 2017"></span><span class="cert-cap">Metrobank-MTAP-DepEd Math Challenge</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-04.jpg" alt="Nutri-Quiz Bee (2nd Place) — 43rd Nutrition Month · July 2017"></span><span class="cert-cap">Nutri-Quiz Bee (2nd Place)</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-05.jpg" alt="District Mathematics Festival 2017 — Certificate of Participation · Mabini District, Sept 2017"></span><span class="cert-cap">District Mathematics Festival 2017</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-06.jpg" alt="Boy Scouts Backyard Camping — Certificate of Participation · Sept 2017"></span><span class="cert-cap">Boy Scouts Backyard Camping</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-07.jpg" alt="Academic Excellence Award — Grade 4 — With High Honors · 2nd Grading, SY 2017-2018"></span><span class="cert-cap">Academic Excellence Award — Grade 4</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-08.jpg" alt="Academic Excellence Award — Grade 5 — High Honors · 2nd Grading, Nov 2018"></span><span class="cert-cap">Academic Excellence Award — Grade 5</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-09.jpg" alt="Certificate of Academic Excellence — Grade 8 — With Honors · SY 2021-2022"></span><span class="cert-cap">Certificate of Academic Excellence — Grade 8</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-10.jpg" alt="Honor Certificate — Grade 9 — With High Honors · SY 2022-2023"></span><span class="cert-cap">Honor Certificate — Grade 9</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-11.jpg" alt="Conduct Award — SY 2022-2023 · Baguio City National High School"></span><span class="cert-cap">Conduct Award</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-12.jpg" alt="District Mathematics Festival — Math Investigation (2nd Place) — Problem-Based Contest · Oct 2023"></span><span class="cert-cap">District Mathematics Festival — Math Investigation (2nd Place)</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-13.jpg" alt="Division Mathematics Festival — Math Investigation (1st Place) — Problem-Based, Junior High (Team) · Oct 2023"></span><span class="cert-cap">Division Mathematics Festival — Math Investigation (1st Place)</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-14.jpg" alt="Honor Certificate — Grade 10 — With High Honors · 1st Grading, 2023-2024"></span><span class="cert-cap">Honor Certificate — Grade 10</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-15.jpg" alt="Certificate of Recognition — Grade 11 STEM — With High Honors · 1st Semester, SY 2024-2025"></span><span class="cert-cap">Certificate of Recognition — Grade 11 STEM</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-16.jpg" alt="BIOlympia 2025 — UP Baguio — Certificate of Participation · March 2025"></span><span class="cert-cap">BIOlympia 2025 — UP Baguio</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-17.jpg" alt="Academic Achievement — With Honors — SY 2025-2026 · Baguio City High School"></span><span class="cert-cap">Academic Achievement — With Honors</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-18.jpg" alt="Outstanding Performance in Mathematics — SY 2025-2026 · Baguio City High School"></span><span class="cert-cap">Outstanding Performance in Mathematics</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-19.jpg" alt="Award in Capstone Project — Expanding Rotating Polygonal Flower · SY 2025-2026"></span><span class="cert-cap">Award in Capstone Project</span></div>
+          <div class="cert-item"><span class="cert-thumb"><span class="cert-placeholder"></span><img class="cert-image" data-soft src="assets/images/certificates/certificate-20.jpg" alt="Leadership Award — SY 2025-2026 · Baguio City High School"></span><span class="cert-cap">Leadership Award</span></div>
+          </div></div>
+        </div>
+      </section>
+
+      <header class="ach-heading">
+        <h1 id="education-title" data-accent="ach-accent">EDUCATIONAL <span class="ach-accent">STAGES</span></h1>
+      </header>
+
+      <div class="stage-grid" id="school-grid" aria-label="Educational stages">
+
+        <!-- ===== ELEMENTARY ===== -->
+        <article class="stage-card has-bg" style="--stage-bg: url('assets/images/education/buildings/apolinario-mabini.jpg')" aria-label="Elementary: Apolinario Mabini Elementary School">
+          <div class="stage-photo stage-dip">
+            <span class="stage-photo-label">DIPLOMA</span>
+            <img class="stage-dip-image" data-soft src="assets/images/diplomas/diploma-01.jpg" alt="Elementary Diploma">
+            <span class="stage-dip-tag">Diploma</span>
+          </div>
+          <div class="stage-head">
+            <figure class="stage-grad"><img class="stage-grad-image" data-soft src="assets/images/education/graduation/elementary.jpg" alt="Elementary graduation photo"></figure>
+            <div class="stage-title">
+              <h2 class="stage-name">Apolinario Mabini Elementary School</h2>
+              <span class="stage-years">2014-2020</span>
+            </div>
+            <div class="stage-logo"><span class="school-mark-wrap"><span class="school-logo-placeholder"><strong>AM</strong><small>SCHOOL LOGO</small></span><img class="school-logo-image" data-soft src="assets/images/education/apolinario-mabini-logo.jpg" alt=""></span></div>
+          </div>
+          <div class="stage-body">
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-award" aria-hidden="true"></i> Academic:</h3>
+              <ul class="stage-list">
+                <li>Consistent Honor Student.</li>
+                <li>Top 3 overall, Batch 2020.</li>
+              </ul>
+            </section>
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-trophy" aria-hidden="true"></i> Competition:</h3>
+              <ul class="stage-list">
+                <li>MTAP – District (2015-2019).</li>
+                <li>District Mathematical Festival (2015-2019).</li>
+                <li>English Festival – Tongue Twister, 2nd place.</li>
+                <li>Nutrition Month – Quiz Bee, 2nd place.</li>
+                <li>Nutrition Month – Slogan Making, 2nd place.</li>
+              </ul>
+            </section>
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-group" aria-hidden="true"></i> Leadership:</h3>
+              <ul class="stage-list">
+                <li>Consistent Class President.</li>
+              </ul>
+            </section>
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-compass" aria-hidden="true"></i> Extracurricular:</h3>
+              <ul class="stage-list">
+                <li>Boy Scout (2014-2020).</li>
+              </ul>
+            </section>
+          </div>
+        </article>
+
+        <!-- ===== JUNIOR HIGH SCHOOL ===== -->
+        <article class="stage-card has-bg" style="--stage-bg: url('assets/images/education/buildings/baguio-city-high-school-junior.jpg')" aria-label="Junior High School: Baguio City High School">
+          <div class="stage-photo stage-dip">
+            <span class="stage-photo-label">DIPLOMA</span>
+            <img class="stage-dip-image" data-soft src="assets/images/diplomas/diploma-02.jpg" alt="Junior High School Diploma">
+            <span class="stage-dip-tag">Diploma</span>
+          </div>
+          <div class="stage-head">
+            <figure class="stage-grad"><img class="stage-grad-image" data-soft src="assets/images/education/graduation/junior-high.jpg" alt="Junior High School graduation photo"></figure>
+            <div class="stage-title">
+              <h2 class="stage-name">Baguio City High School - Junior High</h2>
+              <span class="stage-years">2020-2024</span>
+            </div>
+            <div class="stage-logo"><span class="school-mark-wrap"><span class="school-logo-placeholder"><strong>BCHS</strong><small>SCHOOL LOGO</small></span><img class="school-logo-image" data-soft src="assets/images/education/baguio-city-high-school-logo.png" alt=""></span></div>
+          </div>
+          <div class="stage-body">
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-award" aria-hidden="true"></i> Academic:</h3>
+              <ul class="stage-list">
+                <li>Consistent Honor / High Honor Student.</li>
+                <li>Batch Valedictorian.</li>
+                <li>Award in Mathematics.</li>
+              </ul>
+            </section>
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-trophy" aria-hidden="true"></i> Competition:</h3>
+              <ul class="stage-list">
+                <li>Mathematical Investigation (Problem-Based) – Division 1st place, District 2nd place.</li>
+                <li>Science Quiz Bee – School-based 3rd place.</li>
+              </ul>
+            </section>
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-group" aria-hidden="true"></i> Leadership:</h3>
+              <ul class="stage-list">
+                <li>Class Officer – President &amp; Secretary.</li>
+              </ul>
+            </section>
+          </div>
+        </article>
+
+        <!-- ===== SENIOR HIGH SCHOOL ===== -->
+        <article class="stage-card has-bg" style="--stage-bg: url('assets/images/education/buildings/baguio-city-high-school-senior.jpg')" aria-label="Senior High School: Baguio City High School">
+          <div class="stage-photo stage-dip">
+            <span class="stage-photo-label">DIPLOMA</span>
+            <img class="stage-dip-image" data-soft src="assets/images/diplomas/diploma-03.jpg" alt="Senior High School Diploma">
+            <span class="stage-dip-tag">Diploma</span>
+          </div>
+          <div class="stage-head">
+            <figure class="stage-grad"><img class="stage-grad-image" data-soft src="assets/images/education/graduation/senior-high.jpg" alt="Senior High School graduation photo"></figure>
+            <div class="stage-title">
+              <h2 class="stage-name">Baguio City High School - Senior High</h2>
+              <span class="stage-years">2024-2026</span>
+            </div>
+            <div class="stage-logo"><span class="school-mark-wrap"><span class="school-logo-placeholder"><strong>BCHS</strong><small>SCHOOL LOGO</small></span><img class="school-logo-image" data-soft src="assets/images/education/baguio-city-high-school-logo.png" alt=""></span></div>
+          </div>
+          <div class="stage-body">
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-award" aria-hidden="true"></i> Academic:</h3>
+              <ul class="stage-list">
+                <li>Consistent Honor / High Honor Student.</li>
+                <li>Award in Capstone Project.</li>
+                <li>Award in Mathematics.</li>
+              </ul>
+            </section>
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-trophy" aria-hidden="true"></i> Competition:</h3>
+              <ul class="stage-list">
+                <li>Mathematical Investigation (Research-Based) – Regionals.</li>
+                <li>Mathematical Quiz Bee – District 1st place.</li>
+                <li>BIOlympia (UP Baguio) – Participant.</li>
+              </ul>
+            </section>
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-group" aria-hidden="true"></i> Leadership:</h3>
+              <ul class="stage-list">
+                <li>Leadership Awardee – Class Secretary &amp; Mathletes Guild Officer.</li>
+              </ul>
+            </section>
+          </div>
+        </article>
+
+        <!-- ===== COLLEGE (top) + KINDERGARTEN (bottom) share the 4th column ===== -->
+        <div class="stage-split">
+        <article class="stage-card has-bg stage-compact stage-college" style="--stage-bg: url('assets/images/education/buildings/university-of-cordilleras.jpg')" aria-label="College: University of the Cordilleras">
+          <div class="stage-photo stage-dip is-empty">
+            <span class="stage-photo-label">DIPLOMA · IN PROGRESS</span>
+          </div>
+          <div class="stage-head">
+            <div class="stage-title">
+              <h2 class="stage-name">University of the Cordilleras - College</h2>
+              <span class="stage-years">In progress</span>
+            </div>
+            <div class="stage-logo"><span class="school-mark-wrap"><span class="school-logo-placeholder"><strong>UC</strong><small>SCHOOL LOGO</small></span><img class="school-logo-image" data-soft src="assets/images/education/university-of-cordilleras-logo.jpg" alt=""></span></div>
+          </div>
+        </article>
+
+        <article class="stage-card has-bg stage-kinder" style="--stage-bg: url('assets/images/education/buildings/poliwes-learning-center.jpg')" aria-label="Kindergarten: Poliwes Community Church Learning Center">
+          <div class="stage-head">
+            <figure class="stage-grad"><img class="stage-grad-image" data-soft src="assets/images/education/graduation/kindergarten.jpg" alt="Kindergarten graduation photo"></figure>
+            <div class="stage-title">
+              <span class="stage-level">KINDERGARTEN</span>
+              <h2 class="stage-name">Poliwes Community Church Learning Center</h2>
+              <span class="stage-years">2012-2014</span>
+            </div>
+            <div class="stage-logo"><span class="school-mark-wrap"><span class="school-logo-placeholder"><strong>PC</strong><small>SCHOOL LOGO</small></span><img class="school-logo-image" data-soft alt=""><!-- no logo yet: add src="assets/images/education/your-logo.jpg" to the img on the left --></span></div>
+          </div>
+          <div class="stage-body">
+            <section class="stage-section">
+              <h3 class="stage-section-title"><i class="bx bx-award" aria-hidden="true"></i> Academic:</h3>
+              <ul class="stage-list">
+                <li>Best in Reading.</li>
+                <li>Best in Math.</li>
+                <li>2nd Place.</li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        </div>
+
+      </div>
+    </section>
+  </template>
+
+
+  <!-- ============================================================
+       FAMILY & FRIENDS PAGE
+       To show a photo in a slot: put the picture in assets/images/family/ and write its path in data-photo="",
+       for example data-photo="assets/images/family/mom.jpg". The small text under the slot becomes the photo's caption.
+       ============================================================ -->
+  <template id="view-family-friends">
+    <section class="view-panel inner-view connections-page" aria-labelledby="connections-title">
+      <header class="connections-header">
+        <p class="eyebrow"><span class="eyebrow-line"></span> <span>THE PEOPLE WHO MAKE THE JOURNEY MEANINGFUL</span></p>
+        <h1 id="connections-title">FAMILY <span>&amp; FRIENDS</span></h1>
+      </header>
+      <div class="connections-grid">
+
+        <article class="connection-panel" aria-labelledby="family-title">
+          <div class="connection-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span> <span>THE PEOPLE CLOSEST TO HOME</span></p>
+            <h2 id="family-title">MY <span>FAMILY</span></h2>
+            <p class="placeholder-page-subtitle">More about the people who are part of my story.</p>
+          </div>
+          <div class="memory-slots" aria-label="Family photos">
+            <div class="memory-slot" data-photo=""><i class="bx bx-image-add" aria-hidden="true"></i><span>PHOTO SLOT 01</span><small>Family photo</small></div>
+            <div class="memory-slot" data-photo=""><i class="bx bx-image-add" aria-hidden="true"></i><span>PHOTO SLOT 02</span><small>Add a description later</small></div>
+            <div class="memory-slot" data-photo=""><i class="bx bx-image-add" aria-hidden="true"></i><span>PHOTO SLOT 03</span><small>Add a memory later</small></div>
+          </div>
+          <p class="placeholder-note"><i class="bx bx-lock-alt" aria-hidden="true"></i> <span>This space is ready for details you choose to share.</span></p>
+        </article>
+
+        <article class="connection-panel" aria-labelledby="friends-title">
+          <div class="connection-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span> <span>THE PEOPLE ALONG THE WAY</span></p>
+            <h2 id="friends-title">MY <span>PEOPLE</span></h2>
+            <p class="placeholder-page-subtitle">Memories, friendships, and the people who make the journey meaningful.</p>
+          </div>
+          <div class="memory-slots" aria-label="Friends photos">
+            <div class="memory-slot" data-photo=""><i class="bx bx-image-add" aria-hidden="true"></i><span>PHOTO SLOT 01</span><small>Friends photo</small></div>
+            <div class="memory-slot" data-photo=""><i class="bx bx-image-add" aria-hidden="true"></i><span>PHOTO SLOT 02</span><small>Add a description later</small></div>
+            <div class="memory-slot" data-photo=""><i class="bx bx-image-add" aria-hidden="true"></i><span>PHOTO SLOT 03</span><small>Add a memory later</small></div>
+          </div>
+          <p class="placeholder-note"><i class="bx bx-lock-alt" aria-hidden="true"></i> <span>This space is ready for details you choose to share.</span></p>
+        </article>
+
+      </div>
+    </section>
+  </template>
+
+</body>
+</html>
