@@ -387,49 +387,6 @@ const mainViews = new Set(PAGE_ORDER);
 const contentRegion = document.getElementById("content-region");
 let transitionToken = 0;
 
-function safeUrl(value) {
-  const candidate = String(value || "").trim();
-  if (!candidate) return "";
-  try {
-    const parsed = new URL(candidate, window.location.href);
-    if (!["http:", "https:"].includes(parsed.protocol)) return "";
-    return parsed.href;
-  } catch {
-    return "";
-  }
-}
-
-/* ---------- LINKS: social icons and the CV button turn on when data-url="..." has a link ---------- */
-function setupLinks(root) {
-  root.querySelectorAll("[data-url]").forEach((el) => {
-    const url = safeUrl(el.dataset.url);
-    if (!url) return;                                   /* empty = stays greyed out */
-    if (el.id === "cv-button") {
-      el.disabled = false;
-      el.removeAttribute("title");
-      el.addEventListener("click", () => {
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "Rhaine-Kylle-Balabag-CV";
-        document.body.append(link);
-        link.click();
-        link.remove();
-      });
-      return;
-    }
-    const name = el.dataset.name || "link";
-    const link = document.createElement("a");
-    link.className = el.className;
-    link.innerHTML = el.innerHTML;
-    link.href = url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.setAttribute("aria-label", `${name} (opens in a new tab)`);
-    link.title = `Open ${name} in a new tab`;
-    el.replaceWith(link);
-  });
-}
-
 /* ---------- HOME: the name is typed out letter by letter ---------- */
 function typeHomeName() {
   const output = contentRegion.querySelector("#home-title .typed-output");
@@ -522,6 +479,34 @@ function startCarousel(track, count) {
   carouselFrame = requestAnimationFrame(frame);
 }
 
+/* ---------- FAMILY & FRIENDS: one frame, the friends photo changes by itself (data-seconds in index.html) ---------- */
+let friendsTimer = 0;
+
+function setupFriends() {
+  window.clearInterval(friendsTimer);
+  const frame = document.getElementById("friends-frame");
+  if (!frame) return;
+  const slides = [...frame.querySelectorAll(".fam-slide")];
+  if (!slides.length) return;
+  let index = 0;
+  slides[0].classList.add("is-active");
+  if (slides.length < 2) return;
+  const seconds = Math.max(1, Number(frame.dataset.seconds) || 5);
+  friendsTimer = window.setInterval(() => {
+    if (!frame.isConnected) { window.clearInterval(friendsTimer); return; }
+    for (let step = 1; step <= slides.length; step++) {   /* next photo that loaded (skips missing files) */
+      const next = (index + step) % slides.length;
+      const img = slides[next].querySelector("img");
+      if (img && !img.hidden) {
+        slides[index].classList.remove("is-active");
+        slides[next].classList.add("is-active");
+        index = next;
+        break;
+      }
+    }
+  }, seconds * 1000);
+}
+
 /* ---------- PREVIOUS / NEXT BAR ---------- */
 function setPagerButton(button, view) {
   const name = button.querySelector(".pager-name");
@@ -559,7 +544,11 @@ function fitView() {
   const panel = contentRegion.querySelector(".view-panel");
   if (!panel) return;
   const W = window.innerWidth, home = panel.classList.contains("home-view");
-  const hi = home ? 1 : W >= 1800 ? 1.5 : W >= 1500 ? 1.3 : W >= 1200 ? 1.15 : W >= 820 ? 1.05 : 1.8;
+  const homeSplit = panel.classList.contains("home-split-page");
+  const aboutPage = panel.classList.contains("about-page") && !homeSplit;
+  /* Phones: the Personal Information page scrolls instead of shrinking its text (see style.css) */
+  if ((aboutPage || panel.classList.contains("family-page")) && W <= 620) { panel.style.zoom = 1; return; }
+  const hi = home ? 1 : homeSplit ? (W >= 1500 ? 1.3 : W >= 1200 ? 1.15 : W >= 820 ? 1.05 : 1) : W >= 1800 ? 1.5 : W >= 1500 ? 1.3 : W >= 1200 ? 1.15 : W >= 820 ? 1.05 : 1.8;
   const clippers = [panel, ...panel.querySelectorAll("*")].filter((n) => n === panel || n.matches(".about-reference-layout, .school-card, .stage-card, .school-card-copy, .connection-panel, .fact-card, .about-fact, .about-topic, .about-tag-list li") || (getComputedStyle(n).overflow !== "visible" && !n.closest(".instrument-dial, .cert-viewport")));
   const stack = home ? panel.querySelector(".home-center-stack") : null;
   const inside = () => { if (!stack) return true; const r = stack.getBoundingClientRect(), pr = panel.getBoundingClientRect(); return r.top >= pr.top - 2 && r.bottom <= pr.bottom + 2; };
@@ -600,9 +589,9 @@ function showView(view, { shouldAnimate = true } = {}) {
     contentRegion.classList.remove("is-leaving", "is-visible");
     contentRegion.replaceChildren(template.content.cloneNode(true));
 
-    setupLinks(contentRegion);
     updateAge(contentRegion);
     setupCertificates();
+    setupFriends();
     revealImages(contentRegion);
     if (view === "home") typeHomeName();
 
