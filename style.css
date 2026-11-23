@@ -3200,65 +3200,80 @@ body[data-view="education"] .screen-stage {
 
 
 /* =====================================================================
-   FAMILY & FRIENDS: 3 photos on top (mother, father, siblings) + a friends strip that slides by itself.
-   Nothing here is clickable.
+   FAMILY & FRIENDS: heading + 4 cards (photo left, text right). Nothing here is clickable.
    ===================================================================== */
-.family-page { justify-content: center; }
-.fam-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; clip-path: inset(50%); white-space: nowrap; border: 0; }
-.fam-card {
-  display: flex;
+.family-page { justify-content: center; gap: clamp(10px, 1.8vh, 20px); }
+.fam-head { display: grid; gap: 4px; }
+.fam-head .eyebrow { margin: 0; }
+.fam-head h1 { margin: 0; color: #f5f6f6; font: 700 clamp(28px, 3.4vw, 50px)/1 var(--font-display); letter-spacing: .01em; text-transform: uppercase; }
+.fam-head h1 span { color: #ff5a4d; }
+
+.fam-row { display: grid; min-width: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2.2vh, 22px) clamp(12px, 1.8vw, 24px); }
+.fam-item {
+  display: grid;
   min-width: 0;
-  flex-direction: column;
-  gap: clamp(12px, 2.2vh, 24px);
-  width: 100%;
-  padding: clamp(16px, 2.4vw, 32px);
-  overflow: hidden;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: clamp(12px, 1.6vw, 22px);
+  margin: 0;
+  padding: clamp(12px, 1.4vw, 18px);
   border: 1px solid rgba(225, 232, 235, .16);
   border-top: 2px solid rgba(239, 70, 53, .82);
-  border-radius: 10px 22px 10px 22px;
+  border-radius: 8px 18px 8px 18px;
   background: linear-gradient(132deg, rgba(30, 36, 40, .98), rgba(12, 15, 17, .98) 72%);
-  box-shadow: 0 18px 46px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .05);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .05);
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
 }
-.fam-row { display: grid; min-width: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2.6vh, 28px) clamp(14px, 3vw, 44px); }
-.fam-item { display: flex; min-width: 0; flex-direction: column; gap: 10px; margin: 0; cursor: default; user-select: none; -webkit-user-select: none; }
 
 .fam-photo, .fam-frame {
   position: relative;
+  width: 100%;
+  aspect-ratio: 8 / 7;
   overflow: hidden;
   border: 1px solid rgba(239, 70, 53, .48);
-  border-radius: 3px 18px 3px 18px;
+  border-radius: 3px 14px 3px 14px;
   background: #11171b;
-  box-shadow: 0 12px 34px rgba(0, 0, 0, .32), 0 0 22px rgba(239, 70, 53, .07);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .32), 0 0 22px rgba(239, 70, 53, .07);
 }
-.fam-photo::after, .fam-frame::after { position: absolute; inset: 7px; border: 1px solid rgba(255, 255, 255, .13); border-radius: 2px 12px 2px 12px; content: ''; pointer-events: none; }
-.fam-photo { align-self: center; width: min(100%, 290px); aspect-ratio: 8 / 7; }   /* all 4 frames share this size */
+.fam-photo::after, .fam-frame::after { position: absolute; z-index: 2; inset: 6px; border: 1px solid rgba(255, 255, 255, .13); border-radius: 2px 10px 2px 10px; content: ''; pointer-events: none; }
 .fam-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; pointer-events: none; -webkit-user-drag: none; }
 .fam-photo img[hidden], .fam-slide img[hidden] { display: none; }
 .fam-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #6c767c; }
-.fam-placeholder svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.fam-placeholder svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .fam-placeholder small { font: 700 8px/1 var(--font-display); letter-spacing: .14em; text-transform: uppercase; }
 .fam-photo.has-image .fam-placeholder { display: none; }
-
-.fam-caption { margin: 0; color: #c4cbcf; font: 500 clamp(11px, .95vw, 13px)/1.45 var(--font-body); text-align: center; }
-.fam-caption strong { display: block; margin-bottom: 2px; color: #ff7963; font: 700 clamp(12px, 1.1vw, 15px)/1.2 var(--font-display); letter-spacing: .14em; text-transform: uppercase; }
 
 /* Friends: photos fade into each other and fill the whole frame. */
 .fam-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
 .fam-slide.is-active { opacity: 1; }
-.fam-slide img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; pointer-events: none; -webkit-user-drag: none; }   /* fills the frame (zooms in / crops a little) */
-.fam-frame::after { z-index: 2; }
+.fam-slide img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; pointer-events: none; -webkit-user-drag: none; }
+
+.fam-text { display: grid; min-width: 0; align-content: center; gap: 6px; text-align: left; }
+.fam-kind { color: #ff987a; font: 700 9px/1 var(--font-display); letter-spacing: .2em; text-transform: uppercase; }
+.fam-title { margin: 0; color: #f5f6f6; font: 700 clamp(18px, 1.9vw, 27px)/1.05 var(--font-display); letter-spacing: .02em; text-transform: uppercase; }
+.fam-names { display: grid; margin: 0; gap: 1px; }
+.fam-name { color: #ff6a55; font: 700 clamp(12px, 1.1vw, 15px)/1.3 var(--font-display); letter-spacing: .06em; }
+.fam-desc { margin: 2px 0 0; color: #c4cbcf; font: 500 clamp(11px, .95vw, 13px)/1.55 var(--font-body); }
 
 @media (max-width: 820px) {
-  .fam-card { padding: 14px; }
   .fam-row { gap: 10px; }
-  .fam-caption { font-size: 10px; }
-  .fam-photo::after, .fam-frame::after { inset: 5px; }
+  .fam-item { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 10px; }
+  .fam-photo, .fam-frame { width: min(100%, 220px); justify-self: center; }
+  .fam-text { text-align: center; }
+  .fam-title { font-size: 16px; }
+  .fam-name { font-size: 11px; }
+  .fam-desc { font-size: 10px; }
 }
 @media (max-width: 620px) {
-  /* phones: photos stack and the page scrolls so the captions stay readable */
+  /* phones: cards stack and the page scrolls so everything stays readable */
   .family-page { justify-content: flex-start; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; }
-  .fam-card { flex: 0 0 auto; gap: 18px; }
-  .fam-row { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  .fam-caption { font-size: 12.5px; }
-  .fam-photo { width: min(100%, 300px); }
+  .fam-head h1 { font-size: 28px; }
+  .fam-row { flex: 0 0 auto; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .fam-item { padding: 14px; }
+  .fam-photo, .fam-frame { width: min(100%, 300px); }
+  .fam-title { font-size: 20px; }
+  .fam-name { font-size: 13px; }
+  .fam-desc { font-size: 12.5px; }
 }

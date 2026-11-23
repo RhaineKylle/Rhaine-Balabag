@@ -478,39 +478,72 @@
        ============================================================ -->
   <template id="view-family-friends">
     <section class="view-panel inner-view family-page" aria-labelledby="family-title">
-      <h1 class="fam-sr" id="family-title">Family &amp; Friends</h1>
-      <div class="fam-card">
+      <header class="fam-head">
+        <p class="eyebrow"><span class="eyebrow-line"></span> <span>THE PEOPLE WHO MAKE THE JOURNEY MEANINGFUL</span></p>
+        <h1 id="family-title">FAMILY <span>&amp; FRIENDS</span></h1>
+      </header>
 
-        <!-- 4 PHOTOS in a 2 x 2 grid: Mother, Father / Siblings, Friends.
-             Change the words inside <figcaption> and the picture path in src="...".
-             (mother.jpg is not added yet: put it in assets/images/family/ and it appears.) -->
-        <div class="fam-row">
-          <figure class="fam-item">
-            <div class="fam-photo"><span class="fam-placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><small>Photo coming soon</small></span><img data-soft src="assets/images/family/mother.jpg" alt="Mother"></div>
-            <figcaption class="fam-caption"><strong>Mother</strong>Her care and love keep me grounded and remind me that I am never alone.</figcaption>
-          </figure>
-          <figure class="fam-item">
-            <div class="fam-photo"><span class="fam-placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><small>Photo coming soon</small></span><img data-soft src="assets/images/family/father.jpg" alt="Father" style="object-position: center 53%"></div>
-            <figcaption class="fam-caption"><strong>Father</strong>His protection gives me strength and confidence to face life's challenges.</figcaption>
-          </figure>
-          <figure class="fam-item">
-            <div class="fam-photo"><span class="fam-placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><small>Photo coming soon</small></span><img data-soft src="assets/images/family/siblings.jpg" alt="Siblings"></div>
-            <figcaption class="fam-caption"><strong>Siblings</strong>My constant source of support, laughter, and shared memories.</figcaption>
-          </figure>
+      <!-- 4 CARDS (2 x 2). In each card edit: the small label (fam-kind), the title, the name(s) in colour, and the description.
+           To add another name, copy one <span class="fam-name"> line. Pictures: change the path in src="...".
+           (mother.jpg is not added yet: put it in assets/images/family/ and it appears.) -->
+      <div class="fam-row">
 
-          <!-- FRIENDS: ONE frame that changes photo by itself. data-seconds = how long each photo stays (5 = five seconds).
-               To add a photo, copy one <div class="fam-slide"> line and change the number in the file name.
-               The photos fill the frame, so the sides of wide group photos may be trimmed slightly. -->
-          <figure class="fam-item">
-            <div class="fam-photo fam-frame" id="friends-frame" data-seconds="5">
+        <article class="fam-item">
+          <div class="fam-photo"><span class="fam-placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><small>Photo coming soon</small></span><img data-soft src="assets/images/family/mother.jpg" alt="Mother"></div>
+          <div class="fam-text">
+            <span class="fam-kind">FAMILY</span>
+            <h2 class="fam-title">My Mother</h2>
+            <p class="fam-names">
+              <span class="fam-name">Mary Jane P. Balabag</span>
+            </p>
+            <p class="fam-desc">Her care and love keep me grounded and remind me that I am never alone.</p>
+          </div>
+        </article>
+
+        <article class="fam-item">
+          <div class="fam-photo"><span class="fam-placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><small>Photo coming soon</small></span><img data-soft src="assets/images/family/father.jpg" alt="Father" style="object-position: center 53%"></div>
+          <div class="fam-text">
+            <span class="fam-kind">FAMILY</span>
+            <h2 class="fam-title">My Father</h2>
+            <p class="fam-names">
+              <span class="fam-name">Freddie B. Balabag</span>
+            </p>
+            <p class="fam-desc">His protection gives me strength and confidence to face life's challenges.</p>
+          </div>
+        </article>
+
+        <article class="fam-item">
+          <div class="fam-photo"><span class="fam-placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><small>Photo coming soon</small></span><img data-soft src="assets/images/family/siblings.jpg" alt="Siblings"></div>
+          <div class="fam-text">
+            <span class="fam-kind">FAMILY</span>
+            <h2 class="fam-title">My Siblings</h2>
+            <p class="fam-names">
+              <span class="fam-name">Jean Andrei P. Balabag</span>
+              <span class="fam-name">Jacob Aaron P. Balabag</span>
+            </p>
+            <p class="fam-desc">My constant source of support, laughter, and shared memories.</p>
+          </div>
+        </article>
+
+        <!-- FRIENDS: ONE frame that changes photo by itself. data-seconds = how long each photo stays (5 = five seconds).
+             To add a photo, copy one <div class="fam-slide"> line and change the number in the file name.
+             The photos fill the frame, so the sides of wide group photos may be trimmed slightly. -->
+        <article class="fam-item">
+          <div class="fam-photo fam-frame" id="friends-frame" data-seconds="5">
               <div class="fam-slide"><img data-soft src="assets/images/friends/friends-1.jpg" alt="Friends photo 1"></div>
               <div class="fam-slide"><img data-soft src="assets/images/friends/friends-2.jpg" alt="Friends photo 2"></div>
               <div class="fam-slide"><img data-soft src="assets/images/friends/friends-3.jpg" alt="Friends photo 3"></div>
               <div class="fam-slide"><img data-soft src="assets/images/friends/friends-4.jpg" alt="Friends photo 4"></div>
-            </div>
-            <figcaption class="fam-caption"><strong>Friends</strong>The people who make life brighter through genuine friendship and unforgettable moments.</figcaption>
-          </figure>
-        </div>
+          </div>
+          <div class="fam-text">
+            <span class="fam-kind">FRIENDS</span>
+            <h2 class="fam-title">My Friends</h2>
+            <p class="fam-names">
+              <span class="fam-name">Junior High to College Friends</span>
+            </p>
+            <p class="fam-desc">The people who make life brighter through genuine friendship and unforgettable moments.</p>
+          </div>
+        </article>
 
       </div>
     </section>
