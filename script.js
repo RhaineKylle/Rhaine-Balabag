@@ -370,7 +370,10 @@ function setupNavReticle() {
     ret.style.transform = `translate(${b.left - n.left - 8}px, ${b.top - n.top + 5}px)`;
     ret.classList.add("is-shown");
   };
-  const home = () => moveTo(nav.querySelector(".nav-button.is-active"));
+  const home = () => {
+    const active = nav.querySelector(".nav-button.is-active");
+    if (active) moveTo(active); else ret.classList.remove("is-shown");   /* on Home nothing is highlighted */
+  };
   nav.querySelectorAll(".nav-button").forEach((btn) => {
     btn.addEventListener("mouseenter", () => moveTo(btn));
     btn.addEventListener("focus", () => moveTo(btn));
@@ -383,7 +386,7 @@ function setupNavReticle() {
 
 const navButtons = [...document.querySelectorAll(".nav-button")];
 const PAGE_ORDER = navButtons.map((b) => b.dataset.view);            /* order of the menu = order of Previous / Next */
-const mainViews = new Set(PAGE_ORDER);
+const mainViews = new Set(["home", ...PAGE_ORDER]);   /* Home isn't in the menu, but it is still a page */
 const contentRegion = document.getElementById("content-region");
 let transitionToken = 0;
 
@@ -479,38 +482,10 @@ function startCarousel(track, count) {
   carouselFrame = requestAnimationFrame(frame);
 }
 
-/* ---------- FAMILY & FRIENDS: one frame, the friends photo changes by itself (data-seconds in index.html) ---------- */
-let friendsTimer = 0;
-
-function setupFriends() {
-  window.clearInterval(friendsTimer);
-  const frame = document.getElementById("friends-frame");
-  if (!frame) return;
-  const slides = [...frame.querySelectorAll(".fam-slide")];
-  if (!slides.length) return;
-  let index = 0;
-  slides[0].classList.add("is-active");
-  if (slides.length < 2) return;
-  const seconds = Math.max(1, Number(frame.dataset.seconds) || 5);
-  friendsTimer = window.setInterval(() => {
-    if (!frame.isConnected) { window.clearInterval(friendsTimer); return; }
-    for (let step = 1; step <= slides.length; step++) {   /* next photo that loaded (skips missing files) */
-      const next = (index + step) % slides.length;
-      const img = slides[next].querySelector("img");
-      if (img && !img.hidden) {
-        slides[index].classList.remove("is-active");
-        slides[next].classList.add("is-active");
-        index = next;
-        break;
-      }
-    }
-  }, seconds * 1000);
-}
-
-/* ---------- PREVIOUS / NEXT BAR ---------- */
+/* ---------- BOTTOM BAR: Back to Home + Next ---------- */
 function setPagerButton(button, view) {
   const name = button.querySelector(".pager-name");
-  button.disabled = !view;                       /* first / last tab: that button is switched off */
+  button.disabled = !view;                       /* last page: the Next button is switched off */
   if (view) {
     button.dataset.view = view;
     name.textContent = navButtons.find((b) => b.dataset.view === view)?.textContent.trim() || "";
@@ -522,11 +497,10 @@ function setPagerButton(button, view) {
 
 function updatePager(activeView) {
   const position = PAGE_ORDER.indexOf(activeView);
-  const prev = document.getElementById("pager-prev"), next = document.getElementById("pager-next");
-  if (!prev || !next || position < 0) return;
-  setPagerButton(prev, PAGE_ORDER[position - 1]);
-  setPagerButton(next, PAGE_ORDER[position + 1]);
+  const next = document.getElementById("pager-next");
   document.querySelectorAll(".pager-dot").forEach((dot) => dot.classList.toggle("is-active", dot.dataset.view === activeView));
+  if (!next || position < 0) return;             /* "Back to Home" is fixed in index.html */
+  setPagerButton(next, PAGE_ORDER[position + 1]);
 }
 
 function markActiveView(view) {
@@ -591,7 +565,6 @@ function showView(view, { shouldAnimate = true } = {}) {
 
     updateAge(contentRegion);
     setupCertificates();
-    setupFriends();
     revealImages(contentRegion);
     if (view === "home") typeHomeName();
 

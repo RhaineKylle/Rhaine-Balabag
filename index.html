@@ -28,7 +28,7 @@
      HOME PAGE ........ photo, name, 3 buttons
      PERSONAL INFO .... about me, hobbies, skills, statement
      ACHIEVEMENTS ..... certificates + school cards
-     FAMILY & FRIENDS . parents, siblings, friends (changes every 5 seconds)
+     FAMILY & FRIENDS . parents, siblings, friends
 
    PICTURES: put the file inside the assets/ folder, then change the
    src="..." path. Keep the data-soft word inside every <img>.
@@ -45,7 +45,7 @@
       <div class="ld-gauge ld-tach" id="ld-tach"></div>
       <div class="ld-center">
         <div class="ld-shift"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="ld-gearbox"><small>GEAR</small><b id="ld-gear">N</b></div>
+        <div class="ld-gearbox"><small>COMPUTING FUNDAMENTALS</small><b id="ld-gear">N</b></div>
         <div class="ld-lamps">
           <span class="ld-lamp amber" title="Engine"><svg viewBox="0 0 24 24"><path d="M4 10h2V8h4V6h4v2h3l2 3h2v5h-2l-2 3H9l-2-2H4z"/></svg></span>
           <span class="ld-lamp red" title="Battery"><svg viewBox="0 0 24 24"><path d="M3 7h18v12H3zM6 4h3v3H6zm9 0h3v3h-3zM6 12h4v1H6zm8 0h4v1h-4zm1.5-1.5h1v4h-1z"/></svg></span>
@@ -79,31 +79,25 @@
         <span class="brand-word"><span>RHAINE</span><span class="brand-period">.</span></span>
       </button>
 
-      <!-- The order of these 4 buttons is also the order of the Previous / Next bar at the bottom. -->
+      <!-- The order of these 3 buttons is also the order of the Next button at the bottom. Clicking the RHAINE logo goes Home. -->
       <nav class="primary-nav" aria-label="Main navigation">
-        <button class="nav-button is-active" type="button" data-view="home" aria-current="page">Home</button>
         <button class="nav-button" type="button" data-view="about">Personal Information</button>
         <button class="nav-button" type="button" data-view="education">Achievements</button>
         <button class="nav-button" type="button" data-view="family-friends">Family &amp; Friends</button>
       </nav>
-
-      <button class="button button-primary header-cta" type="button" data-view="about">
-        <span>Let's Connect</span><i class="bx bx-arrow-up-right" aria-hidden="true"></i>
-      </button>
     </header>
 
     <main class="screen-stage">
       <div class="content-region" id="content-region" aria-live="polite" aria-atomic="true"></div>
     </main>
 
-    <!-- PREVIOUS / NEXT bar (the page names between the arrows are filled in automatically from the menu above) -->
+    <!-- BOTTOM BAR: "Back to Home" on every page + the Next page button (its name is filled in automatically from the menu above). Hidden on the Home page. -->
     <nav class="page-pager" id="page-pager" aria-label="Page navigation">
-      <button class="pager-btn pager-prev" id="pager-prev" type="button">
+      <button class="pager-btn pager-prev" id="pager-prev" type="button" data-view="home">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-        <span class="pager-text"><small class="pager-dir">Previous</small><strong class="pager-name"></strong></span>
+        <span class="pager-text"><small class="pager-dir">Back to</small><strong class="pager-name">Home</strong></span>
       </button>
       <span class="pager-dots" id="pager-dots">
-        <button class="pager-dot" type="button" data-view="home" aria-label="Home"></button>
         <button class="pager-dot" type="button" data-view="about" aria-label="Personal Information"></button>
         <button class="pager-dot" type="button" data-view="education" aria-label="Achievements"></button>
         <button class="pager-dot" type="button" data-view="family-friends" aria-label="Family &amp; Friends"></button>
@@ -134,12 +128,8 @@
           <h1 class="home-split-name" id="home-title" aria-label="Rhaine Kylle Balabag"><span class="typed-output" aria-hidden="true">Rhaine Kylle Balabag</span><span class="typing-caret" aria-hidden="true"></span></h1>
           <span class="home-split-rule" aria-hidden="true"></span>
 
-          <!-- THE 3 BUTTONS. data-view says which page opens: about / education / family-friends -->
-          <nav class="home-menu" aria-label="Explore my portfolio">
-            <button class="home-menu-button" type="button" data-view="about"><span class="home-menu-num">01</span><span class="home-menu-label">Personal Information</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-            <button class="home-menu-button" type="button" data-view="education"><span class="home-menu-num">02</span><span class="home-menu-label">Achievements</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-            <button class="home-menu-button" type="button" data-view="family-friends"><span class="home-menu-num">03</span><span class="home-menu-label">Family &amp; Friends</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          </nav>
+          <!-- THE BUTTON: opens the first page (Personal Information). Change the words inside <span>. -->
+          <button class="button button-primary home-explore" type="button" data-view="about"><span>Explore my portfolio</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
 
       </div>
@@ -157,7 +147,7 @@
           <img class="about-profile-photo" data-soft src="assets/images/about/picture-1.jpg" alt="Rhaine Kylle Balabag in graduation attire with medals" loading="eager" decoding="async">
         </figure>
         <article class="about-copy about-profile-copy">
-          <p class="eyebrow"><span class="eyebrow-line"></span> <span>ABOUT ME / PROFILE</span></p>
+          <p class="eyebrow"><span class="eyebrow-line"></span> <span>PERSONAL INFORMATION</span></p>
           <header class="about-profile-heading">
             <!-- The last word (in the accent colour) is the one inside about-name-accent -->
             <h1 id="about-title"><span>Rhaine Kylle</span> <span class="about-name-accent">Balabag</span></h1>
@@ -165,19 +155,36 @@
           </header>
           <div class="about-profile-content">
             <!-- AGE updates itself every year from data-birthdate (year-month-day); only the number changes. -->
-            <!-- PERSONAL DETAILS, grouped in 3 cards. To add a detail, copy one <div class="about-info-row"> line into the right card. -->
+            <!-- PERSONAL DETAILS, grouped in cards. To add a detail, copy one <div class="about-info-row"> line into the right card. -->
             <div class="about-info-grid" aria-label="Personal details">
               <section class="about-info-card" aria-labelledby="info-personal-title">
                 <h2 class="about-info-title" id="info-personal-title">PERSONAL</h2>
                 <dl class="about-info-list">
                   <div class="about-info-row"><dt>Nickname</dt><dd>Rhainie</dd></div>
-                  <div class="about-info-row"><dt>Birthday</dt><dd>November 26, 2007</dd></div>
-                  <div class="about-info-row"><dt>Age</dt><dd data-birthdate="2007-11-26">18 years old</dd></div>
                   <div class="about-info-row"><dt>Sex</dt><dd>Male</dd></div>
                   <div class="about-info-row"><dt>Status</dt><dd>Single</dd></div>
-                  <div class="about-info-row"><dt>Zodiac</dt><dd>Sagittarius</dd></div>
+                  <div class="about-info-row"><dt>Professional Status</dt><dd>Student</dd></div>
+                  <div class="about-info-row"><dt>Birth Order</dt><dd>Second</dd></div>
                   <div class="about-info-row"><dt>Nationality</dt><dd>Filipino</dd></div>
+                  <div class="about-info-row"><dt>Citizenship</dt><dd>Filipino</dd></div>
+                  <div class="about-info-row"><dt>Ethnicity</dt><dd>Kankana-ey</dd></div>
                   <div class="about-info-row"><dt>Religion</dt><dd>Roman Catholic</dd></div>
+                  <div class="about-info-row"><dt>MBTI</dt><dd>ENFJ-T</dd></div>
+                </dl>
+              </section>
+              <section class="about-info-card" aria-labelledby="info-signs-title">
+                <h2 class="about-info-title" id="info-signs-title">BIRTH &amp; SIGNS</h2>
+                <dl class="about-info-list">
+                  <div class="about-info-row"><dt>Birthday</dt><dd>November 26, 2007</dd></div>
+                  <div class="about-info-row"><dt>Birth time</dt><dd>Around 11:00 PM</dd></div>
+                  <div class="about-info-row"><dt>Age</dt><dd data-birthdate="2007-11-26">19 years old</dd></div>
+                  <div class="about-info-row"><dt>Place of Birth</dt><dd>Baguio Medical Center</dd></div>
+                  <div class="about-info-row"><dt>Zodiac Sun</dt><dd>Sagittarius</dd></div>
+                  <div class="about-info-row"><dt>Zodiac Moon</dt><dd>Cancer</dd></div>
+                  <div class="about-info-row"><dt>Zodiac Rising</dt><dd>Leo</dd></div>
+                  <div class="about-info-row"><dt>Chinese Zodiac</dt><dd>Fire Pig</dd></div>
+                  <div class="about-info-row"><dt>Birthstone</dt><dd>Topaz</dd></div>
+                  <div class="about-info-row"><dt>Birthflower</dt><dd>Chrysanthemum</dd></div>
                 </dl>
               </section>
               <section class="about-info-card" aria-labelledby="info-physical-title">
@@ -186,19 +193,26 @@
                   <div class="about-info-row"><dt>Height</dt><dd>5'5"</dd></div>
                   <div class="about-info-row"><dt>Weight</dt><dd>53 kg</dd></div>
                   <div class="about-info-row"><dt>BMI</dt><dd>Normal</dd></div>
+                  <div class="about-info-row"><dt>Body Type</dt><dd>Ectomorph</dd></div>
                   <div class="about-info-row"><dt>Blood Type</dt><dd>B</dd></div>
+                  <div class="about-info-row"><dt>Skin Color</dt><dd>Medium-Neutral</dd></div>
                   <div class="about-info-row"><dt>Eye Color</dt><dd>Brown</dd></div>
                   <div class="about-info-row"><dt>Hair Color</dt><dd>Black</dd></div>
+                  <div class="about-info-row"><dt>Hair Length</dt><dd>Mid length</dd></div>
+                  <div class="about-info-row"><dt>Hair Type</dt><dd>Straight</dd></div>
+                  <div class="about-info-row"><dt>Shoe Size</dt><dd>42</dd></div>
+                  <div class="about-info-row"><dt>Vision</dt><dd>20/20</dd></div>
                   <div class="about-info-row"><dt>Disabilities</dt><dd>None</dd></div>
+                  <div class="about-info-row"><dt>Allergies</dt><dd>None</dd></div>
                 </dl>
               </section>
-              <section class="about-info-card is-stacked" aria-labelledby="info-contact-title">
+              <section class="about-info-card about-contact-card" aria-labelledby="info-contact-title">
                 <h2 class="about-info-title" id="info-contact-title">CONTACT</h2>
-                <dl class="about-info-list">
-                  <div class="about-info-row"><dt>Number</dt><dd><a href="tel:09065769525">09065769525</a></dd></div>
-                  <div class="about-info-row"><dt>Email Address</dt><dd><a href="mailto:rhainekyllebalabag@gmail.com">rhainekyllebalabag@gmail.com</a></dd></div>
-                  <div class="about-info-row"><dt>School Email</dt><dd><a href="mailto:rpb7622@students.uc-bcf.edu.ph">rpb7622@students.uc-bcf.edu.ph</a></dd></div>
-                  <div class="about-info-row"><dt>Location</dt><dd>Poblacion Tuba, Benguet, Philippines</dd></div>
+                <dl class="about-contact-list">
+                  <div class="about-contact-item"><dt>Number</dt><dd><a href="tel:09065769525">09065769525</a></dd></div>
+                  <div class="about-contact-item"><dt>Email Address</dt><dd><a href="mailto:rhainekyllebalabag@gmail.com">rhainekyllebalabag@gmail.com</a></dd></div>
+                  <div class="about-contact-item"><dt>School Email</dt><dd><a href="mailto:rpb7622@students.uc-bcf.edu.ph">rpb7622@students.uc-bcf.edu.ph</a></dd></div>
+                  <div class="about-contact-item"><dt>Location</dt><dd>Poblacion Tuba, Benguet, Philippines</dd></div>
                 </dl>
               </section>
             </div>
@@ -223,7 +237,6 @@
                   <li>Mathematics</li>
                   <li>Research</li>
                   <li>Creativity</li>
-                  <li>Everyday technology</li>
                 </ul>
               </section>
               <section class="about-topic" aria-labelledby="about-skills-title">
@@ -496,7 +509,7 @@
             <p class="fam-names">
               <span class="fam-name">Mary Jane P. Balabag</span>
             </p>
-            <p class="fam-desc">Her care and love keep me grounded and remind me that I am never alone.</p>
+            <p class="fam-desc">"Mama Tiger" - Her care and love keep me grounded and remind me that I am never alone. She roars like a tiger but her hugs are the softest.</p>
           </div>
         </article>
 
@@ -508,7 +521,7 @@
             <p class="fam-names">
               <span class="fam-name">Freddie B. Balabag</span>
             </p>
-            <p class="fam-desc">His protection gives me strength and confidence to face life's challenges.</p>
+            <p class="fam-desc">Ang "Mr. Bean" ng buhay ko! His protection gives me strength and confidence to face life's challenges.</p>
           </div>
         </article>
 
@@ -521,27 +534,20 @@
               <span class="fam-name">Jean Andrei P. Balabag</span>
               <span class="fam-name">Jacob Aaron P. Balabag</span>
             </p>
-            <p class="fam-desc">My constant source of support, laughter, and shared memories.</p>
+            <p class="fam-desc">Minsan Kapatid, Madalas Ka-puksahan. My constant source of support and laughter.</p>
           </div>
         </article>
 
-        <!-- FRIENDS: ONE frame that changes photo by itself. data-seconds = how long each photo stays (5 = five seconds).
-             To add a photo, copy one <div class="fam-slide"> line and change the number in the file name.
-             The photos fill the frame, so the sides of wide group photos may be trimmed slightly. -->
+        <!-- FRIENDS: ONE college photo. Change the picture in src="..." and the words below. -->
         <article class="fam-item">
-          <div class="fam-photo fam-frame" id="friends-frame" data-seconds="5">
-              <div class="fam-slide"><img data-soft src="assets/images/friends/friends-1.jpg" alt="Friends photo 1"></div>
-              <div class="fam-slide"><img data-soft src="assets/images/friends/friends-2.jpg" alt="Friends photo 2"></div>
-              <div class="fam-slide"><img data-soft src="assets/images/friends/friends-3.jpg" alt="Friends photo 3"></div>
-              <div class="fam-slide"><img data-soft src="assets/images/friends/friends-4.jpg" alt="Friends photo 4"></div>
-          </div>
+          <div class="fam-photo"><span class="fam-placeholder"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/></svg><small>Photo coming soon</small></span><img data-soft src="assets/images/friends/friends-4.jpg" alt="My day ones in College 2026"></div>
           <div class="fam-text">
             <span class="fam-kind">FRIENDS</span>
-            <h2 class="fam-title">My Friends</h2>
+            <h2 class="fam-title">My College Friends</h2>
             <p class="fam-names">
-              <span class="fam-name">Junior High to College Friends</span>
+              <span class="fam-name">The Group Chat That Never Sleeps</span>
             </p>
-            <p class="fam-desc">The people who make life brighter through genuine friendship and unforgettable moments.</p>
+            <p class="fam-desc">"Pupunta ako kapag pupunta ka", my group of friends that are always ready to party party. They are always one call away even if their schedule is very busy. "Gala gusto, aral ayaw?!", Bomba na!.</p>
           </div>
         </article>
 
